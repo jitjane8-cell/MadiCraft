@@ -14,20 +14,8 @@ export default function Page() {
         <div className="absolute bottom-0 right-0 w-[60%] h-[60%] bg-purple-500/10 blur-[140px]" />
       </div>
 
-      {/* MOBILE NAV */}
-      <div className="fixed bottom-4 left-1/2 -translate-x-1/2 flex lg:hidden gap-3 bg-white/5 border border-white/10 backdrop-blur px-4 py-2 rounded-2xl z-50">
-        {[
-          [<Home size={18} />, "หน้าหลัก"],
-          [<Users size={18} />, "คู่มือ"],
-          [<ShoppingCart size={18} />, "ร้านค้า"],
-          [<Wallet size={18} />, "เติมเงิน"],
-          [<Trophy size={18} />, "อันดับ"],
-        ].map((i, idx) => (
-          <button key={idx} className="p-2 rounded-xl hover:bg-white/10 transition">
-            {i[0]}
-          </button>
-        ))}
-      </div>
+      {/* SIDE NAV */}
+      <nav className="fixed left-6 top-1/2 -translate-y-1/2 z-60 hidden lg:flex flex-col gap-10">
         {[
           [<Home />, "หน้าหลัก"],
           [<Users />, "คู่มือ"],
@@ -59,7 +47,7 @@ export default function Page() {
         </header>
 
         {/* HERO */}
-        <section className="relative pt-6 md:pt-2 pb-16 md:pb-20 text-center flex flex-col items-center justify-center min-h-[85vh] -translate-y-6 md:-translate-y-10">
+        <section className="relative pt-32 pb-20 text-center flex flex-col items-center">
 
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="w-[600px] h-[600px] bg-cyan-500/20 blur-[140px] rounded-full animate-pulse" />
@@ -67,16 +55,16 @@ export default function Page() {
           </div>
           <img 
             src="/images/8023.png" 
-            className="w-[320px] sm:w-[420px] md:w-[650px] relative z-10 -mt-12 md:-mt-6"
+            className="w-[520px] md:w-[650px] relative z-10" 
             style={{ mixBlendMode: 'screen' }} 
-          />
+          />  
 
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-8 relative z-10">
-            <button className="px-6 sm:px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-2xl font-bold hover:scale-105 transition flex items-center justify-center gap-2 w-full sm:w-auto">
+          <div className="flex gap-4 mt-10 relative z-10">
+            <button className="px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-2xl font-bold hover:scale-105 transition flex items-center gap-2">
               PLAY <Play size={18} />
             </button>
 
-            <button className="px-6 sm:px-8 py-3 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition w-full sm:w-auto">
+            <button className="px-8 py-3 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition">
               PLAY.MADICRAFT.ONLINE
             </button>
           </div>
