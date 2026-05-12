@@ -87,8 +87,8 @@ export default function Page() {
 
         </section>
 
-        {/* WRAPPER FOR STATUS & SHOP - รวบสองส่วนเข้าด้วยกันเพื่อคุมระยะห่าง */}
-        <div className="relative z-10 -translate-y-24 md:-translate-y-40">
+{/* WRAPPER FOR STATUS & SHOP - ยกทั้งแผงขึ้นสูงกว่าเดิม */}
+        <div className="relative z-10 -translate-y-32 md:-translate-y-48">
           
           {/* STATUS */}
           <section className="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -105,9 +105,9 @@ export default function Page() {
             ))}
           </section>
 
-          {/* SHOP - ปรับเป็นค่าติดลบเพื่อให้ STORE ขึ้นไปชิด STATUS มากขึ้น */}
-          <section className="max-w-6xl mx-auto px-6 -mt-2 md:-mt-4">
-            <h2 className="text-3xl font-black mb-8 text-center uppercase tracking-wider">Store</h2>
+          {/* SHOP - ใช้ Margin ติดลบเพื่อดึง STORE ขึ้นมาจ่อตูดแผงข้างบน */}
+          <section className="max-w-6xl mx-auto px-6 -mt-6 md:-mt-10">
+            <h2 className="text-3xl font-black mb-6 text-center uppercase tracking-wider">Store</h2>
             
             <div className="grid md:grid-cols-3 gap-6">
               {[
@@ -130,6 +130,7 @@ export default function Page() {
               ))}
             </div>
           </section>
+
         </div>
 
         {/* FOOTER */}
