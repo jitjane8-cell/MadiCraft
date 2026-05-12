@@ -62,7 +62,7 @@ export default function Page() {
         </header>
 
         {/* HERO */}
-        <section className="relative pt-10 md:pt-4 pb-12 md:pb-16 text-center flex flex-col items-center -translate-y-10 md:-translate-y-14">
+        <section className="relative pt-4 md:pt-2 pb-12 md:pb-16 text-center flex flex-col items-center justify-start min-h-[70vh] md:min-h-[75vh] -translate-y-16 md:-translate-y-24">
 
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="w-[600px] h-[600px] bg-cyan-500/20 blur-[140px] rounded-full animate-pulse" />
