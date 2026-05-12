@@ -1,111 +1,128 @@
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#0a0a0a] text-white">
-      
+    <main className="min-h-screen bg-black text-white">
+
+      {/* Background Grid */}
+      <div
+        className="fixed inset-0 opacity-20"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, #222 1px, transparent 1px), linear-gradient(to bottom, #222 1px, transparent 1px)",
+          backgroundSize: "40px 40px",
+        }}
+      />
+
       {/* Navbar */}
-      <nav className="flex items-center justify-between px-8 py-5 border-b border-white/10">
-        <h1 className="text-3xl font-bold text-cyan-400">
+      <nav className="relative z-10 flex items-center justify-between px-10 py-5 border-b border-zinc-800 bg-black/70 backdrop-blur">
+        <h1 className="text-2xl font-bold text-orange-400">
           MadiCraft
         </h1>
 
-        <div className="flex gap-6 text-gray-300">
-          <a href="#">หน้าหลัก</a>
-          <a href="#">คู่มือ</a>
-          <a href="#">ร้านค้า</a>
-          <a href="#">เติมเงิน</a>
-          <a href="#">Discord</a>
+        <div className="flex gap-6 text-zinc-300">
+          <button>หน้าแรก</button>
+          <button>ผู้เล่น</button>
+          <button>ร้านค้า</button>
+          <button>เติมเงิน</button>
         </div>
+
+        <button className="bg-orange-400 text-black px-5 py-2 rounded-xl font-bold hover:scale-105 transition">
+          เข้าสู่ระบบ
+        </button>
       </nav>
 
       {/* Hero */}
-      <section className="flex flex-col items-center justify-center text-center py-28 px-6">
-        <h1 className="text-7xl font-extrabold bg-gradient-to-r from-cyan-400 to-purple-500 text-transparent bg-clip-text">
+      <section className="relative z-10 flex flex-col items-center justify-center text-center pt-32">
+
+        <h1 className="text-7xl font-black text-orange-400 drop-shadow-[0_0_25px_orange]">
           MadiCraft
         </h1>
 
-        <p className="mt-6 text-gray-400 max-w-2xl text-xl">
-          เซิร์ฟเวอร์ Minecraft Survival สุดมันส์ เล่นฟรี
+        <p className="mt-5 text-zinc-400 text-xl">
+          JAVA & BEDROCK SERVER
         </p>
 
         <div className="mt-10 flex gap-5">
-          <button className="bg-cyan-500 hover:bg-cyan-400 transition px-8 py-4 rounded-2xl font-bold text-lg shadow-lg shadow-cyan-500/30">
-            เข้าเล่นเซิร์ฟ
+          <button className="bg-orange-400 text-black px-8 py-4 rounded-2xl font-bold hover:scale-105 transition">
+            ดูเล่น
           </button>
 
-          <button className="bg-purple-500 hover:bg-purple-400 transition px-8 py-4 rounded-2xl font-bold text-lg shadow-lg shadow-purple-500/30">
-            เข้าดิสคอร์ด
+          <button className="border border-zinc-700 px-8 py-4 rounded-2xl hover:bg-zinc-900 transition">
+            เติมเงิน
           </button>
         </div>
 
-        <div className="mt-10 text-gray-500">
-          IP : play.madicraft.online
-        </div>
       </section>
 
-      {/* Product Section */}
-      <section className="px-8 pb-24">
-        <h2 className="text-4xl font-bold mb-10">
-          สินค้าแนะนำ
+      {/* Cards */}
+      <section className="relative z-10 max-w-6xl mx-auto grid md:grid-cols-2 gap-6 mt-24 px-6">
+
+        {/* Server Card */}
+        <div className="bg-orange-400 text-black rounded-3xl p-8 shadow-[0_0_40px_rgba(255,165,0,0.4)]">
+
+          <p className="font-bold">
+            604 กำลังเล่น
+          </p>
+
+          <div className="mt-10 flex flex-col items-center">
+
+            <div className="w-20 h-20 rounded-2xl bg-white" />
+
+            <h2 className="mt-5 text-3xl font-black">
+              MadiCraft
+            </h2>
+
+            <button className="mt-6 bg-black/20 px-6 py-3 rounded-xl font-bold">
+              PLAY.MADICRAFT.NET
+            </button>
+
+          </div>
+        </div>
+
+        {/* Discord Card */}
+        <div className="bg-indigo-500 rounded-3xl p-8 shadow-[0_0_40px_rgba(99,102,241,0.4)]">
+
+          <p className="font-bold">
+            4,010 ออนไลน์
+          </p>
+
+          <div className="mt-10 flex flex-col items-center">
+
+            <div className="w-20 h-20 rounded-2xl bg-white" />
+
+            <h2 className="mt-5 text-3xl font-black">
+              Discord
+            </h2>
+
+            <button className="mt-6 bg-black/20 px-6 py-3 rounded-xl font-bold">
+              เข้าร่วม Discord
+            </button>
+
+          </div>
+        </div>
+
+      </section>
+
+      {/* Announcement */}
+      <section className="relative z-10 max-w-6xl mx-auto mt-16 px-6 pb-24">
+
+        <h2 className="text-3xl font-black">
+          ประกาศ
         </h2>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="mt-6 border border-orange-500/40 bg-orange-500/10 rounded-2xl p-6">
 
-          <div className="bg-white/5 border border-white/10 rounded-3xl p-6 hover:border-cyan-400 transition">
-            <h3 className="text-2xl font-bold text-cyan-400">
-              VIP Rank
-            </h3>
+          <h3 className="text-orange-300 font-bold text-xl">
+            ยินดีต้อนรับเข้าสู่เซิร์ฟเวอร์ MadiCraft
+          </h3>
 
-            <p className="mt-3 text-gray-400">
-              ยศสุดคุ้ม พร้อมสิทธิพิเศษมากมาย
-            </p>
-
-            <div className="mt-6 text-3xl font-bold">
-              99฿
-            </div>
-
-            <button className="mt-6 w-full bg-cyan-500 hover:bg-cyan-400 py-3 rounded-xl font-semibold">
-              ซื้อสินค้า
-            </button>
-          </div>
-
-          <div className="bg-white/5 border border-white/10 rounded-3xl p-6 hover:border-purple-400 transition">
-            <h3 className="text-2xl font-bold text-purple-400">
-              Crate Key
-            </h3>
-
-            <p className="mt-3 text-gray-400">
-              เปิดกล่องลุ้นของแรร์สุดเทพ
-            </p>
-
-            <div className="mt-6 text-3xl font-bold">
-              49฿
-            </div>
-
-            <button className="mt-6 w-full bg-purple-500 hover:bg-purple-400 py-3 rounded-xl font-semibold">
-              ซื้อสินค้า
-            </button>
-          </div>
-
-          <div className="bg-white/5 border border-white/10 rounded-3xl p-6 hover:border-pink-400 transition">
-            <h3 className="text-2xl font-bold text-pink-400">
-              Battle Pass
-            </h3>
-
-            <p className="mt-3 text-gray-400">
-              ปลดล็อครางวัลสุดพิเศษ
-            </p>
-
-            <div className="mt-6 text-3xl font-bold">
-              149฿
-            </div>
-
-            <button className="mt-6 w-full bg-pink-500 hover:bg-pink-400 py-3 rounded-xl font-semibold">
-              ซื้อสินค้า
-            </button>
-          </div>
+          <p className="mt-2 text-zinc-400">
+            ระบบ Survival เปิดให้เล่นแล้ววันนี้
+          </p>
 
         </div>
+
       </section>
+
     </main>
-  );
+  )
 }
