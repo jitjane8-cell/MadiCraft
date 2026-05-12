@@ -89,7 +89,6 @@ export default function Page() {
 
         {/* STATUS */}
         <section className="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-4 -translate-y-8 md:-translate-y-12">
-
           {[
             ["🟢 Online", "Status"],
             ["👥 604 Players", "Online"],
@@ -101,43 +100,33 @@ export default function Page() {
               <div className="text-zinc-400 text-sm">{i[1]}</div>
             </div>
           ))}
-
         </section>
 
-        {/* SHOP */}
-        <section className="max-w-6xl mx-auto px-6 py-16 md:py-20 -translate-y-8 md:-translate-y-14">
+        {/* SHOP - ปรับระยะห่างตรงนี้ */}
+        <section className="max-w-6xl mx-auto px-6 pt-8 pb-16 md:pt-10 md:pb-20 -translate-y-4 md:-translate-y-6">
 
-          <h2 className="text-3xl font-black mb-10 text-center">STORE</h2>
+          <h2 className="text-3xl font-black mb-8 text-center">STORE</h2>
 
           <div className="grid md:grid-cols-3 gap-6">
-
             {[
               ["VIP", "Basic Perks", "49 THB", "from-cyan-500"],
               ["MVP", "Fly + Kit", "99 THB", "from-purple-500"],
               ["LEGEND", "All Unlock", "199 THB", "from-pink-500"],
             ].map((i, idx) => (
               <div key={idx} className="p-[1px] bg-gradient-to-r from-white/10 to-white/5 rounded-3xl">
-
                 <div className="bg-[#0a0c14] p-8 rounded-3xl hover:scale-[1.03] transition">
-
                   <h3 className="text-2xl font-black">{i[0]}</h3>
                   <p className="text-zinc-400 mt-2">{i[1]}</p>
-
                   <div className="text-green-400 text-2xl font-black mt-6">
                     {i[2]}
                   </div>
-
                   <button className={`mt-6 w-full py-3 rounded-xl bg-gradient-to-r ${i[3]} text-black font-bold`}>
                     BUY
                   </button>
-
                 </div>
-
               </div>
             ))}
-
           </div>
-
         </section>
 
         {/* FOOTER */}
