@@ -10,6 +10,7 @@ export default function Home() {
 
         <div className="flex gap-6 text-gray-300">
           <a href="#">หน้าหลัก</a>
+          <a href="#">คู่มือ</a>
           <a href="#">ร้านค้า</a>
           <a href="#">เติมเงิน</a>
           <a href="#">Discord</a>
@@ -23,7 +24,7 @@ export default function Home() {
         </h1>
 
         <p className="mt-6 text-gray-400 max-w-2xl text-xl">
-          เซิร์ฟเวอร์ Minecraft Survival สุดมันส์ เล่นฟรี เล่นฟรี เล่นฟรี
+          เซิร์ฟเวอร์ Minecraft Survival สุดมันส์ เล่นฟรี
         </p>
 
         <div className="mt-10 flex gap-5">
@@ -37,7 +38,7 @@ export default function Home() {
         </div>
 
         <div className="mt-10 text-gray-500">
-          IP : play.madicraft.net
+          IP : play.madicraft.online
         </div>
       </section>
 
