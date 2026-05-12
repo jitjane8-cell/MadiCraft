@@ -9,7 +9,7 @@ export default function Page() {
 
       {/* BACKGROUND */}
       <div className="fixed inset-0 z-0">
-        <div className="absolute inset-0 bg-[url('/images/8021.jpg')] bg-cover bg-center opacity-40 blur-sm scale-105" />
+        <div className="absolute inset-0 bg-[url('/images/8022.png')] bg-cover bg-center opacity-40 blur-sm scale-105" />
         <div className="absolute top-0 left-0 w-[60%] h-[60%] bg-cyan-500/10 blur-[140px]" />
         <div className="absolute bottom-0 right-0 w-[60%] h-[60%] bg-purple-500/10 blur-[140px]" />
       </div>
@@ -53,15 +53,11 @@ export default function Page() {
             <div className="w-[600px] h-[600px] bg-cyan-500/20 blur-[140px] rounded-full animate-pulse" />
             <div className="w-[500px] h-[500px] bg-purple-500/20 blur-[140px] rounded-full animate-pulse" />
           </div>
-
-          <img
-            src="/images/madicraft-bg.jpg"
-            className="w-[520px] md:w-[650px] relative z-10 hover:scale-105 transition duration-700"
-          />
-
-          <p className="text-zinc-400 mt-6 relative z-10">
-            • Survival • Economy •
-          </p>
+          <img 
+            src="/images/8023.png" 
+            className="w-[520px] md:w-[650px] relative z-10" 
+            style={{ mixBlendMode: 'screen' }} 
+          />  
 
           <div className="flex gap-4 mt-10 relative z-10">
             <button className="px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-2xl font-bold hover:scale-105 transition flex items-center gap-2">
