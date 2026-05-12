@@ -1,191 +1,141 @@
 "use client";
 
-import {
-  Home,
-  ShoppingCart,
-  Wallet,
-  Trophy,
-  Users,
-  Play,
-  MessageCircle,
-} from "lucide-react";
+import React from "react";
+import { Home, ShoppingCart, Wallet, Trophy, Users, Play, MessageCircle } from "lucide-react";
 
-export default function HomePage() {
+export default function Page() {
   return (
-    <main className="min-h-screen bg-black text-white overflow-hidden">
+    <main className="min-h-screen bg-[#02040a] text-white overflow-x-hidden">
 
-      {/* Background */}
-      <div className="fixed inset-0 bg-[radial-gradient(circle_at_top,#1e3a8a_0%,#000000_60%)] z-0" />
+      {/* BACKGROUND */}
+      <div className="fixed inset-0 z-0">
+        <div className="absolute inset-0 bg-[url('/images/madicraft-bg.jpg')] bg-cover bg-center opacity-40 blur-sm scale-105" />
+        <div className="absolute top-0 left-0 w-[60%] h-[60%] bg-cyan-500/10 blur-[140px]" />
+        <div className="absolute bottom-0 right-0 w-[60%] h-[60%] bg-purple-500/10 blur-[140px]" />
+      </div>
 
-      {/* Navbar */}
-      <header className="relative z-10 border-b border-white/10 backdrop-blur">
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-8 py-5">
-
-          {/* Logo */}
-          <div className="flex items-center gap-3">
-
-            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-400 to-purple-500 flex items-center justify-center shadow-[0_0_30px_#3b82f6]">
-              <span className="text-2xl font-black">M</span>
-            </div>
-
-            <div>
-              <h1 className="text-2xl font-black">
-                MADICRAFT
-              </h1>
-
-              <p className="text-cyan-400 text-sm">
-                JAVA & BEDROCK
-              </p>
-            </div>
+      {/* SIDE NAV */}
+      <nav className="fixed left-6 top-1/2 -translate-y-1/2 z-60 hidden lg:flex flex-col gap-10">
+        {[
+          [<Home />, "หน้าหลัก"],
+          [<Users />, "คู่มือ"],
+          [<ShoppingCart />, "ร้านค้า"],
+          [<Wallet />, "เติมเงิน"],
+          [<Trophy />, "อันดับ"],
+        ].map((i, idx) => (
+          <div key={idx} className="group relative">
+            <button className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition">
+              {i[0]}
+            </button>
+            <span className="absolute left-16 top-1/2 -translate-y-1/2 text-xs bg-white text-black px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition">
+              {i[1]}
+            </span>
           </div>
+        ))}
+      </nav>
 
-          {/* Menu */}
-          <nav className="hidden md:flex items-center gap-6">
+      {/* CONTENT */}
+      <div className="relative z-10">
 
-            <button className="flex items-center gap-2 bg-cyan-500/20 border border-cyan-400 px-5 py-3 rounded-2xl text-cyan-300 shadow-[0_0_20px_rgba(34,211,238,.35)]">
-              <Home size={18} />
-              หน้าแรก
-            </button>
+        {/* HEADER */}
+        <header className="flex justify-between items-center px-10 py-6">
+          <div className="font-black text-2xl tracking-tight">MADICRAFT</div>
 
-            <button className="flex items-center gap-2 hover:text-cyan-400 transition">
-              <Users size={18} />
-              คู่มือ
-            </button>
-
-            <button className="flex items-center gap-2 hover:text-cyan-400 transition">
-              <ShoppingCart size={18} />
-              ร้านค้า
-            </button>
-
-            <button className="flex items-center gap-2 hover:text-cyan-400 transition">
-              <Wallet size={18} />
-              เติมเงิน
-            </button>
-
-            <button className="flex items-center gap-2 hover:text-cyan-400 transition">
-              <Trophy size={18} />
-              อันดับ
-            </button>
-          </nav>
-
-          {/* Login */}
-          <button className="bg-gradient-to-r from-cyan-500 to-purple-500 px-6 py-3 rounded-2xl font-bold shadow-[0_0_25px_rgba(59,130,246,.5)] hover:scale-105 transition">
-            เข้าสู่ระบบ
+          <button className="flex items-center gap-2 px-5 py-2 bg-white/5 border border-white/10 rounded-full hover:bg-white/10 transition">
+            <MessageCircle size={18} /> Discord
           </button>
-        </div>
-      </header>
+        </header>
 
-      {/* Hero */}
-      <section className="relative z-10 pt-24 pb-20">
+        {/* HERO */}
+        <section className="relative pt-32 pb-20 text-center flex flex-col items-center">
 
-        <div className="max-w-6xl mx-auto px-6 text-center">
-
-          {/* Big Title */}
-          <h1 className="text-7xl md:text-8xl font-black bg-gradient-to-r from-cyan-300 via-blue-400 to-purple-500 bg-clip-text text-transparent drop-shadow-[0_0_25px_#3b82f6]">
-            MADICRAFT
-          </h1>
-
-          <p className="mt-4 text-2xl text-cyan-300 tracking-[6px]">
-            JAVA & BEDROCK
-          </p>
-
-          {/* Buttons */}
-          <div className="flex justify-center gap-6 mt-12">
-
-            <button className="flex items-center gap-3 bg-gradient-to-r from-blue-500 to-cyan-400 px-10 py-5 rounded-2xl text-lg font-bold shadow-[0_0_30px_rgba(59,130,246,.5)] hover:scale-105 transition">
-              <Play />
-              ร้านค้า
-            </button>
-
-            <button className="flex items-center gap-3 border border-white/20 px-10 py-5 rounded-2xl text-lg font-bold hover:border-cyan-400 hover:text-cyan-300 transition">
-              <Wallet />
-              เติมเงิน
-            </button>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-[600px] h-[600px] bg-cyan-500/20 blur-[140px] rounded-full animate-pulse" />
+            <div className="w-[500px] h-[500px] bg-purple-500/20 blur-[140px] rounded-full animate-pulse" />
           </div>
-        </div>
-      </section>
 
-      {/* Cards */}
-      <section className="relative z-10 max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-8 pb-20">
+          <img
+            src="/images/madicraft-bg.jpg"
+            className="w-[520px] md:w-[650px] relative z-10 hover:scale-105 transition duration-700"
+          />
 
-        {/* Server Card */}
-        <div className="rounded-3xl border border-cyan-500/30 bg-cyan-500/10 backdrop-blur p-8 shadow-[0_0_50px_rgba(34,211,238,.15)]">
-
-          <p className="text-cyan-400 font-bold">
-            👥 604 กำลังเล่น
+          <p className="text-zinc-400 mt-6 relative z-10">
+            • Survival • Economy •
           </p>
 
-          <div className="mt-8 flex flex-col items-center">
+          <div className="flex gap-4 mt-10 relative z-10">
+            <button className="px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-2xl font-bold hover:scale-105 transition flex items-center gap-2">
+              PLAY <Play size={18} />
+            </button>
 
-            <div className="w-32 h-32 rounded-full bg-gradient-to-br from-cyan-400 to-blue-700 flex items-center justify-center shadow-[0_0_40px_rgba(34,211,238,.5)]">
-              <span className="text-6xl font-black">M</span>
-            </div>
-
-            <h2 className="text-4xl font-black mt-6">
-              MadiCraft
-            </h2>
-
-            <button className="mt-8 w-full py-4 rounded-2xl border border-cyan-400 bg-black/30 hover:bg-cyan-500/20 transition font-bold text-xl">
+            <button className="px-8 py-3 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition">
               PLAY.MADICRAFT.ONLINE
             </button>
           </div>
-        </div>
 
-        {/* Discord */}
-        <div className="rounded-3xl border border-purple-500/30 bg-purple-500/10 backdrop-blur p-8 shadow-[0_0_50px_rgba(168,85,247,.15)]">
+        </section>
 
-          <p className="text-purple-400 font-bold">
-            💬 4,010 ออนไลน์
-          </p>
+        {/* STATUS */}
+        <section className="max-w-6xl mx-auto px-6 grid md:grid-cols-4 gap-4">
 
-          <div className="mt-8 flex flex-col items-center">
-
-            <div className="w-32 h-32 rounded-full bg-gradient-to-br from-purple-400 to-indigo-700 flex items-center justify-center shadow-[0_0_40px_rgba(168,85,247,.5)]">
-              <MessageCircle size={60} />
+          {[
+            ["🟢 Online", "Status"],
+            ["👥 604 Players", "Online"],
+            ["⚡ 1.21 + ", "Version"],
+            ["🔥 24/7", "Uptime"],
+          ].map((i, idx) => (
+            <div key={idx} className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:scale-105 transition">
+              <div className="text-lg font-bold">{i[0]}</div>
+              <div className="text-zinc-400 text-sm">{i[1]}</div>
             </div>
+          ))}
 
-            <h2 className="text-4xl font-black mt-6">
-              Discord
-            </h2>
+        </section>
 
-            <button className="mt-8 w-full py-4 rounded-2xl border border-purple-400 bg-black/30 hover:bg-purple-500/20 transition font-bold text-xl">
-              เข้าร่วมดิสคอร์ด
-            </button>
+        {/* SHOP */}
+        <section className="max-w-6xl mx-auto px-6 py-24">
+
+          <h2 className="text-3xl font-black mb-10 text-center">STORE</h2>
+
+          <div className="grid md:grid-cols-3 gap-6">
+
+            {[
+              ["VIP", "Basic Perks", "49 THB", "from-cyan-500"],
+              ["MVP", "Fly + Kit", "99 THB", "from-purple-500"],
+              ["LEGEND", "All Unlock", "199 THB", "from-pink-500"],
+            ].map((i, idx) => (
+              <div key={idx} className="p-[1px] bg-gradient-to-r from-white/10 to-white/5 rounded-3xl">
+
+                <div className="bg-[#0a0c14] p-8 rounded-3xl hover:scale-[1.03] transition">
+
+                  <h3 className="text-2xl font-black">{i[0]}</h3>
+                  <p className="text-zinc-400 mt-2">{i[1]}</p>
+
+                  <div className="text-green-400 text-2xl font-black mt-6">
+                    {i[2]}
+                  </div>
+
+                  <button className={`mt-6 w-full py-3 rounded-xl bg-gradient-to-r ${i[3]} text-black font-bold`}>
+                    BUY
+                  </button>
+
+                </div>
+
+              </div>
+            ))}
+
           </div>
-        </div>
-      </section>
 
-      {/* Announcement */}
-      <section className="relative z-10 max-w-6xl mx-auto px-6 pb-24">
+        </section>
 
-        <h2 className="text-4xl font-black mb-8">
-          📢 ประกาศ
-        </h2>
+        {/* FOOTER */}
+        <footer className="text-center py-10 border-t border-white/10 text-zinc-500 text-sm">
+            เราไม่มีส่วนเกี่ยวข้องกับ Mojang AB.
+          © 2026 MADICRAFT - ขอสงวนลิขสิทธิ์
+        </footer>
 
-        <div className="rounded-3xl border border-cyan-500/30 bg-cyan-500/5 backdrop-blur p-8">
+      </div>
 
-          <h3 className="text-2xl font-bold text-cyan-300">
-            ยินดีต้อนรับเข้าสู่ MadiCraft!
-          </h3>
-
-          <p className="text-zinc-300 mt-4 text-lg">
-            เซิร์ฟเวอร์ Survival เปิดให้เล่นแล้ววันนี้ พร้อมระบบใหม่มากมาย
-          </p>
-
-          <p className="text-zinc-500 mt-4">
-            3 ชั่วโมงที่แล้ว
-          </p>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="relative z-10 border-t border-white/10 py-10 text-center text-zinc-500">
-        <p>เราไม่มีส่วนเกี่ยวข้องกับ Mojang AB.</p>
-
-        <p className="mt-2">
-          © 2026 MadiCraft. All Right Reserved.
-        </p>
-      </footer>
     </main>
   );
 }
