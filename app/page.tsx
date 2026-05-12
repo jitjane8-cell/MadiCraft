@@ -14,8 +14,6 @@ export default function Page() {
         <div className="absolute bottom-0 right-0 w-[60%] h-[60%] bg-purple-500/10 blur-[140px]" />
       </div>
 
-      {/* SIDE NAV */}
-      <nav className="fixed left-6 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-10 lg:flex">
       {/* MOBILE NAV */}
       <div className="fixed bottom-4 left-1/2 -translate-x-1/2 flex lg:hidden gap-3 bg-white/5 border border-white/10 backdrop-blur px-4 py-2 rounded-2xl z-50">
         {[
