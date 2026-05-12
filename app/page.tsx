@@ -47,7 +47,7 @@ export default function Page() {
         </header>
 
         {/* HERO */}
-        <section className="relative pt-32 pb-20 text-center flex flex-col items-center">
+        <section className="relative pt-16 md:pt-10 pb-16 md:pb-20 text-center flex flex-col items-center justify-center min-h-[80vh]">
 
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="w-[600px] h-[600px] bg-cyan-500/20 blur-[140px] rounded-full animate-pulse" />
@@ -55,16 +55,16 @@ export default function Page() {
           </div>
           <img 
             src="/images/8023.png" 
-            className="w-[520px] md:w-[650px] relative z-10" 
+            className="w-[320px] sm:w-[420px] md:w-[650px] relative z-10 -mt-6 md:mt-0"
             style={{ mixBlendMode: 'screen' }} 
-          />  
+          />
 
-          <div className="flex gap-4 mt-10 relative z-10">
-            <button className="px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-2xl font-bold hover:scale-105 transition flex items-center gap-2">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-8 relative z-10">
+            <button className="px-6 sm:px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-2xl font-bold hover:scale-105 transition flex items-center justify-center gap-2 w-full sm:w-auto">
               PLAY <Play size={18} />
             </button>
 
-            <button className="px-8 py-3 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition">
+            <button className="px-6 sm:px-8 py-3 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition w-full sm:w-auto">
               PLAY.MADICRAFT.ONLINE
             </button>
           </div>
