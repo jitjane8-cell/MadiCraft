@@ -87,47 +87,51 @@ export default function Page() {
 
         </section>
 
-        {/* STATUS */}
-        <section className="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-4 -translate-y-8 md:-translate-y-12">
-          {[
-            ["🟢 Online", "Status"],
-            ["👥 604 Players", "Online"],
-            ["⚡ 1.21 + ", "Version"],
-            ["🔥 24/7", "Uptime"],
-          ].map((i, idx) => (
-            <div key={idx} className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:scale-105 transition">
-              <div className="text-lg font-bold">{i[0]}</div>
-              <div className="text-zinc-400 text-sm">{i[1]}</div>
-            </div>
-          ))}
-        </section>
-
-        {/* SHOP - ปรับระยะห่างตรงนี้ */}
-        <section className="max-w-6xl mx-auto px-6 pt-8 pb-16 md:pt-10 md:pb-20 -translate-y-4 md:-translate-y-6">
-
-          <h2 className="text-3xl font-black mb-8 text-center">STORE</h2>
-
-          <div className="grid md:grid-cols-3 gap-6">
+{/* WRAPPER FOR STATUS & SHOP - รวบสองส่วนเข้าด้วยกันเพื่อคุมระยะห่าง */}
+        <div className="relative z-10 -translate-y-20 md:-translate-y-32">
+          
+          {/* STATUS */}
+          <section className="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              ["VIP", "Basic Perks", "49 THB", "from-cyan-500"],
-              ["MVP", "Fly + Kit", "99 THB", "from-purple-500"],
-              ["LEGEND", "All Unlock", "199 THB", "from-pink-500"],
+              ["🟢 Online", "Status"],
+              ["👥 604 Players", "Online"],
+              ["⚡ 1.21 + ", "Version"],
+              ["🔥 24/7", "Uptime"],
             ].map((i, idx) => (
-              <div key={idx} className="p-[1px] bg-gradient-to-r from-white/10 to-white/5 rounded-3xl">
-                <div className="bg-[#0a0c14] p-8 rounded-3xl hover:scale-[1.03] transition">
-                  <h3 className="text-2xl font-black">{i[0]}</h3>
-                  <p className="text-zinc-400 mt-2">{i[1]}</p>
-                  <div className="text-green-400 text-2xl font-black mt-6">
-                    {i[2]}
-                  </div>
-                  <button className={`mt-6 w-full py-3 rounded-xl bg-gradient-to-r ${i[3]} text-black font-bold`}>
-                    BUY
-                  </button>
-                </div>
+              <div key={idx} className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:scale-105 transition">
+                <div className="text-lg font-bold">{i[0]}</div>
+                <div className="text-zinc-400 text-sm">{i[1]}</div>
               </div>
             ))}
-          </div>
-        </section>
+          </section>
+
+          {/* SHOP - ปรับ mt (margin-top) ตรงนี้เพื่อดึงขึ้นไปหา Status */}
+          <section className="max-w-6xl mx-auto px-6 mt-12 md:mt-16">
+            <h2 className="text-3xl font-black mb-10 text-center uppercase tracking-wider">Store</h2>
+            
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                ["VIP", "Basic Perks", "49 THB", "from-cyan-500"],
+                ["MVP", "Fly + Kit", "99 THB", "from-purple-500"],
+                ["LEGEND", "All Unlock", "199 THB", "from-pink-500"],
+              ].map((i, idx) => (
+                <div key={idx} className="p-[1px] bg-gradient-to-r from-white/10 to-white/5 rounded-3xl">
+                  <div className="bg-[#0a0c14] p-8 rounded-3xl hover:scale-[1.03] transition">
+                    <h3 className="text-2xl font-black">{i[0]}</h3>
+                    <p className="text-zinc-400 mt-2">{i[1]}</p>
+                    <div className="text-green-400 text-2xl font-black mt-6">
+                      {i[2]}
+                    </div>
+                    <button className={`mt-6 w-full py-3 rounded-xl bg-gradient-to-r ${i[3]} text-black font-bold`}>
+                      BUY
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+        </div>
 
         {/* FOOTER */}
         <footer className="text-center py-10 border-t border-white/10 text-zinc-500 text-sm">
