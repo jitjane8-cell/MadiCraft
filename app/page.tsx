@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Home, ShoppingCart, Wallet, Trophy, Users, Play, MessageCircle } from "lucide-react";
+import { Home, ShoppingCart, Wallet, Trophy, BookOpen, Play, MessageCircle } from "lucide-react";
 
 export default function Page() {
   return (
@@ -12,13 +12,14 @@ export default function Page() {
         <div className="absolute inset-0 bg-[url('/images/8022.png')] bg-cover bg-center opacity-40 blur-sm scale-105" />
         <div className="absolute top-0 left-0 w-[60%] h-[60%] bg-cyan-500/10 blur-[140px]" />
         <div className="absolute bottom-0 right-0 w-[60%] h-[60%] bg-purple-500/10 blur-[140px]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/30 to-black/80" />
       </div>
 
       {/* MOBILE NAV */}
       <div className="fixed bottom-4 left-1/2 -translate-x-1/2 flex lg:hidden gap-3 bg-white/5 border border-white/10 backdrop-blur px-4 py-2 rounded-2xl z-50">
         {[
           [<Home size={18} />, "หน้าหลัก"],
-          [<Users size={18} />, "คู่มือ"],
+          [<BookOpen size={18} />, "คู่มือ"],
           [<ShoppingCart size={18} />, "ร้านค้า"],
           [<Wallet size={18} />, "เติมเงิน"],
           [<Trophy size={18} />, "อันดับ"],
@@ -33,16 +34,41 @@ export default function Page() {
       <nav className="fixed left-6 top-1/2 -translate-y-1/2 z-50 hidden lg:flex flex-col gap-10">
         {[
           [<Home />, "หน้าหลัก"],
-          [<Users />, "คู่มือ"],
+          [<BookOpen />, "คู่มือ"],
           [<ShoppingCart />, "ร้านค้า"],
           [<Wallet />, "เติมเงิน"],
           [<Trophy />, "อันดับ"],
         ].map((i, idx) => (
           <div key={idx} className="group relative">
-            <button className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition">
+            <button 
+              className="
+                w-14 h-14 rounded-2xl
+                bg-white/5 border border-white/10
+                flex items-center justify-center
+                hover:bg-cyan-500/20
+                hover:border-cyan-400/40
+                hover:shadow-[0_0_25px_rgba(34,211,238,0.35)]
+                hover:scale-110
+                transition-all duration-300
+              "
+            >
               {i[0]}
             </button>
-            <span className="absolute left-16 top-1/2 -translate-y-1/2 text-xs bg-white text-black px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition">
+            <span
+              className="
+                absolute left-16 top-1/2 -translate-y-1/2
+                px-4 py-2 rounded-xl
+                bg-black/70 backdrop-blur-xl
+                border border-white/10
+                text-white text-sm font-medium tracking-wide
+                opacity-0 translate-x-2
+                group-hover:opacity-100
+                group-hover:translate-x-0
+                transition-all duration-300
+                whitespace-nowrap
+                shadow-[0_0_20px_rgba(0,0,0,0.35)]
+              "
+            >
               {i[1]}
             </span>
           </div>
@@ -54,15 +80,72 @@ export default function Page() {
 
         {/* HEADER */}
         <header className="flex justify-between items-center px-6 md:px-10 py-5 md:py-6">
-          <div className="font-black text-2xl tracking-tight">MADICRAFT</div>
 
-          <button className="flex items-center gap-2 px-5 py-2 bg-white/5 border border-white/10 rounded-full hover:bg-white/10 transition">
-            <MessageCircle size={18} /> Discord
-          </button>
+          {/* LOGO */}
+          <div className="flex flex-col">
+            <div className="
+              font-black text-2xl tracking-tight
+              bg-gradient-to-r from-cyan-300 via-white to-purple-400
+              bg-clip-text text-transparent
+              drop-shadow-[0_0_20px_rgba(34,211,238,0.35)]
+            ">
+              MADICRAFT
+            </div>
+
+            <div className="
+              text-[10px] text-zinc-400
+              tracking-[0.35em] uppercase
+              text-center mt-[-2px]
+            ">
+              JAVA & BEDROCK
+            </div>
+          </div>
+
+          {/* BUTTONS */}
+          <div className="flex items-center gap-3">
+
+            {/* LOGIN */}
+            <button
+              className="
+                px-6 py-2.5 rounded-2xl
+                bg-gradient-to-r from-cyan-500/20 to-purple-500/20
+                border border-cyan-400/20
+                text-white font-semibold
+                backdrop-blur-xl
+
+                hover:from-cyan-500/30
+                hover:to-purple-500/30
+                hover:border-cyan-300/40
+                hover:shadow-[0_0_25px_rgba(34,211,238,0.25)]
+                hover:scale-105
+
+                active:scale-95
+
+                transition-all duration-300
+              "
+            >
+              เข้าสู่ระบบ
+            </button>
+
+            {/* DISCORD */}
+            <button className="
+              flex items-center gap-2
+              px-5 py-2 rounded-2xl
+              bg-gradient-to-r from-cyan-500 to-purple-600
+              hover:scale-105
+              transition-all duration-300
+              font-medium
+              shadow-[0_0_30px_rgba(34,211,238,0.35)]
+            ">
+              <MessageCircle size={18} />
+              Discord
+            </button>
+
+          </div>
         </header>
 
-        {/* HERO */}
-        <section className="relative pt-4 md:pt-2 pb-12 md:pb-16 text-center flex flex-col items-center justify-start min-h-[70vh] md:min-h-[75vh] -translate-y-16 md:-translate-y-24">
+        {/* HERO SECTION */}
+        <section className="relative pt-4 md:pt-10 pb-4 text-center flex flex-col items-center justify-start min-h-[60vh] md:min-h-[65vh] -translate-y-12 md:-translate-y-20">
 
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="w-[600px] h-[600px] bg-cyan-500/20 blur-[140px] rounded-full animate-pulse" />
@@ -70,67 +153,139 @@ export default function Page() {
           </div>
 
           <img 
-            src="/images/8023.png" 
-            className="w-[280px] sm:w-[380px] md:w-[650px] relative z-10"
-            style={{ mixBlendMode: "screen" }} 
+            src="/images/8023.png"
+            className="w-[280px] sm:w-[380px] md:w-[600px] relative z-10
+            drop-shadow-[0_0_80px_rgba(34,211,238,0.4)]
+            hover:scale-105 transition duration-700"
           />
 
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-6 md:mt-10 relative z-10">
-            <button className="px-6 sm:px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-2xl font-bold hover:scale-105 transition flex items-center justify-center gap-2 w-full sm:w-auto">
-              PLAY <Play size={18} />
+          {/* PLAY BUTTONS */}
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-6 md:mt-8 relative z-10">
+
+            {/* LOGIN BUTTON */}
+            <button
+              className="
+                px-8 py-3
+                bg-gradient-to-r from-cyan-500 to-purple-600
+                rounded-2xl font-bold
+                hover:scale-105
+                hover:shadow-[0_0_30px_rgba(34,211,238,0.35)]
+                transition-all duration-300
+                flex items-center justify-center gap-2
+              "
+            >
+              เข้าสู่ระบบ
             </button>
 
-            <button className="px-6 sm:px-8 py-3 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition w-full sm:w-auto">
+            {/* COPY IP BUTTON */}
+            <button
+              onClick={async () => {
+                try {
+                  await navigator.clipboard.writeText("play.madicraft.online");
+                  console.log("Copied!");
+                } catch (err) {
+                  console.error("Failed to copy");
+                }
+              }}
+              className="
+                px-6 py-3
+                bg-white/5
+                border border-white/10
+                backdrop-blur-md
+                rounded-2xl
+                hover:bg-white/10
+                hover:border-cyan-400/30
+                hover:shadow-[0_0_25px_rgba(34,211,238,0.2)]
+                transition-all duration-300
+                font-medium
+                cursor-pointer
+  "
+            >
               PLAY.MADICRAFT.ONLINE
             </button>
+
           </div>
 
-        </section>
-
-{/* WRAPPER FOR STATUS & SHOP - ยกทั้งแผงขึ้นสูงกว่าเดิม */}
-        <div className="relative z-10 -translate-y-32 md:-translate-y-48">
-          
-          {/* STATUS */}
-          <section className="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              ["🟢 Online", "Status"],
-              ["👥 604 Players", "Online"],
-              ["⚡ 1.21 + ", "Version"],
-              ["🔥 24/7", "Uptime"],
-            ].map((i, idx) => (
-              <div key={idx} className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:scale-105 transition">
-                <div className="text-lg font-bold">{i[0]}</div>
-                <div className="text-zinc-400 text-sm">{i[1]}</div>
-              </div>
-            ))}
-          </section>
-
-          {/* SHOP - ใช้ Margin ติดลบเพื่อดึง STORE ขึ้นมาจ่อตูดแผงข้างบน */}
-          <section className="max-w-6xl mx-auto px-6 -mt-6 md:-mt-10">
-            <h2 className="text-3xl font-black mb-6 text-center uppercase tracking-wider">Store</h2>
-            
-            <div className="grid md:grid-cols-3 gap-6">
+          {/* STATUS BAR - ทำเป็นแถบยาวตามรูปตัวอย่าง */}
+          <div className="mt-12 md:mt-16 w-full max-w-5xl px-6 relative z-10 mx-auto">
+            <div className="bg-black/40 border border-white/10 backdrop-blur-xl rounded-2xl py-6 px-4 md:px-10 flex flex-wrap justify-between items-center gap-6">
               {[
-                ["VIP", "Basic Perks", "49 THB", "from-cyan-500"],
-                ["MVP", "Fly + Kit", "99 THB", "from-purple-500"],
-                ["LEGEND", "All Unlock", "199 THB", "from-pink-500"],
+                ["🟢 Online", "Status"],
+                ["👥 604 Players", "Online"],
+                ["⚡ 1.21 + ", "Version"],
+                ["🔥 24/7", "Uptime"],
               ].map((i, idx) => (
-                <div key={idx} className="p-[1px] bg-gradient-to-r from-white/10 to-white/5 rounded-3xl">
-                  <div className="bg-[#0a0c14] p-8 rounded-3xl hover:scale-[1.03] transition">
-                    <h3 className="text-2xl font-black">{i[0]}</h3>
-                    <p className="text-zinc-400 mt-2">{i[1]}</p>
-                    <div className="text-green-400 text-2xl font-black mt-6">
-                      {i[2]}
-                    </div>
-                    <button className={`mt-6 w-full py-3 rounded-xl bg-gradient-to-r ${i[3]} text-black font-bold`}>
-                      BUY
-                    </button>
-                  </div>
+                <div key={idx} className="flex flex-col items-center md:items-start">
+                  <div className="text-lg font-bold">{i[0]}</div>
+                  <div className="text-zinc-400 text-xs uppercase tracking-widest">{i[1]}</div>
                 </div>
               ))}
             </div>
-          </section>
+          </div>
+        </section>
 
+        {/* NEWS / UPDATE BAR */}
+        <div className="mt-12 md:mt-16 w-full max-w-5xl px-6 relative z-10 mx-auto">
+          <div className="bg-black/40 border border-white/10 backdrop-blur-xl rounded-2xl p-6 md:p-8">
+
+            {/* HEADER */}
+            <div className="flex flex-col items-center justify-center gap-3 mb-6 text-center">
+              <div className="text-lg font-bold">📰 ข่าวสารล่าสุด</div>
+              <button className="text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition">
+                ดูทั้งหมด
+              </button>
+            </div>
+
+            {/* NEWS LIST */}
+            <div className="space-y-4 text-center">
+
+              {/* ITEM 1 */}
+              <div className="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition text-center">
+                <div className="flex-1">
+                  <div className="font-semibold text-white">
+                    🎉 อัปเดตเวอร์ชัน 1.21 พร้อมระบบใหม่
+                  </div>
+                  <div className="text-sm text-zinc-400">
+                    เพิ่มระบบเควส + ของรางวัลใหม่ในเซิร์ฟเวอร์
+                  </div>
+                </div>
+                <div className="text-xs text-zinc-500 whitespace-nowrap">
+                  วันนี้
+                </div>
+              </div>
+
+              {/* ITEM 2 */}
+              <div className="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition text-center">
+                <div className="flex-1">
+                  <div className="font-semibold text-white">
+                    🔥 กิจกรรมแจกของพิเศษเริ่มแล้ว
+                  </div>
+                  <div className="text-sm text-zinc-400">
+                    เข้าเล่นทุกวันรับ Token ฟรี + ของรางวัลรายวัน
+                  </div>
+                </div>
+                <div className="text-xs text-zinc-500 whitespace-nowrap">
+                  2 วันที่แล้ว
+                </div>
+              </div>
+
+              {/* ITEM 3 */}
+              <div className="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition text-center">
+                <div className="flex-1">
+                  <div className="font-semibold text-white">
+                    🛠️ ปรับสมดุลระบบเศรษฐกิจใหม่
+                  </div>
+                  <div className="text-sm text-zinc-400">
+                    ปรับราคาไอเทมในร้านค้าให้สมดุลมากขึ้น
+                  </div>
+                </div>
+                <div className="text-xs text-zinc-500 whitespace-nowrap">
+                  5 วันที่แล้ว
+                </div>
+              </div>
+
+            </div>
+          </div>
         </div>
 
         {/* FOOTER */}
