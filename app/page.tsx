@@ -9,7 +9,7 @@ export default function Page() {
 
       {/* BACKGROUND */}
       <div className="fixed inset-0 z-0">
-        <div className="absolute inset-0 bg-[url('/images/madicraft-bg.jpg')] bg-cover bg-center opacity-40 blur-sm scale-105" />
+        <div className="absolute inset-0 bg-[url('/images/8021.jpg')] bg-cover bg-center opacity-40 blur-sm scale-105" />
         <div className="absolute top-0 left-0 w-[60%] h-[60%] bg-cyan-500/10 blur-[140px]" />
         <div className="absolute bottom-0 right-0 w-[60%] h-[60%] bg-purple-500/10 blur-[140px]" />
       </div>
