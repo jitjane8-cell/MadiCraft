@@ -14,8 +14,23 @@ export default function Page() {
         <div className="absolute bottom-0 right-0 w-[60%] h-[60%] bg-purple-500/10 blur-[140px]" />
       </div>
 
-      {/* SIDE NAV */}
-      <nav className="fixed left-6 top-1/2 -translate-y-1/2 z-60 hidden lg:flex flex-col gap-10">
+      {/* MOBILE NAV */}
+      <div className="fixed bottom-4 left-1/2 -translate-x-1/2 flex lg:hidden gap-3 bg-white/5 border border-white/10 backdrop-blur px-4 py-2 rounded-2xl z-50">
+        {[
+          [<Home size={18} />, "หน้าหลัก"],
+          [<Users size={18} />, "คู่มือ"],
+          [<ShoppingCart size={18} />, "ร้านค้า"],
+          [<Wallet size={18} />, "เติมเงิน"],
+          [<Trophy size={18} />, "อันดับ"],
+        ].map((i, idx) => (
+          <button key={idx} className="p-2 rounded-xl hover:bg-white/10 transition">
+            {i[0]}
+          </button>
+        ))}
+      </div>
+
+      {/* SIDE NAV (desktop) */}
+      <nav className="fixed left-6 top-1/2 -translate-y-1/2 z-50 hidden lg:flex flex-col gap-10">
         {[
           [<Home />, "หน้าหลัก"],
           [<Users />, "คู่มือ"],
@@ -38,7 +53,7 @@ export default function Page() {
       <div className="relative z-10">
 
         {/* HEADER */}
-        <header className="flex justify-between items-center px-10 py-6">
+        <header className="flex justify-between items-center px-6 md:px-10 py-5 md:py-6">
           <div className="font-black text-2xl tracking-tight">MADICRAFT</div>
 
           <button className="flex items-center gap-2 px-5 py-2 bg-white/5 border border-white/10 rounded-full hover:bg-white/10 transition">
@@ -47,24 +62,25 @@ export default function Page() {
         </header>
 
         {/* HERO */}
-        <section className="relative pt-32 pb-20 text-center flex flex-col items-center">
+        <section className="relative pt-10 md:pt-4 pb-12 md:pb-16 text-center flex flex-col items-center -translate-y-10 md:-translate-y-14">
 
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="w-[600px] h-[600px] bg-cyan-500/20 blur-[140px] rounded-full animate-pulse" />
             <div className="w-[500px] h-[500px] bg-purple-500/20 blur-[140px] rounded-full animate-pulse" />
           </div>
+
           <img 
             src="/images/8023.png" 
-            className="w-[520px] md:w-[650px] relative z-10" 
-            style={{ mixBlendMode: 'screen' }} 
-          />  
+            className="w-[280px] sm:w-[380px] md:w-[650px] relative z-10"
+            style={{ mixBlendMode: "screen" }} 
+          />
 
-          <div className="flex gap-4 mt-10 relative z-10">
-            <button className="px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-2xl font-bold hover:scale-105 transition flex items-center gap-2">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-6 md:mt-10 relative z-10">
+            <button className="px-6 sm:px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-2xl font-bold hover:scale-105 transition flex items-center justify-center gap-2 w-full sm:w-auto">
               PLAY <Play size={18} />
             </button>
 
-            <button className="px-8 py-3 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition">
+            <button className="px-6 sm:px-8 py-3 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition w-full sm:w-auto">
               PLAY.MADICRAFT.ONLINE
             </button>
           </div>
@@ -72,7 +88,7 @@ export default function Page() {
         </section>
 
         {/* STATUS */}
-        <section className="max-w-6xl mx-auto px-6 grid md:grid-cols-4 gap-4">
+        <section className="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-4 -translate-y-8 md:-translate-y-12">
 
           {[
             ["🟢 Online", "Status"],
@@ -89,7 +105,7 @@ export default function Page() {
         </section>
 
         {/* SHOP */}
-        <section className="max-w-6xl mx-auto px-6 py-24">
+        <section className="max-w-6xl mx-auto px-6 py-16 md:py-20 -translate-y-8 md:-translate-y-14">
 
           <h2 className="text-3xl font-black mb-10 text-center">STORE</h2>
 
@@ -126,12 +142,12 @@ export default function Page() {
 
         {/* FOOTER */}
         <footer className="text-center py-10 border-t border-white/10 text-zinc-500 text-sm">
-            เราไม่มีส่วนเกี่ยวข้องกับ Mojang AB.
+          เราไม่มีส่วนเกี่ยวข้องกับ Mojang AB.
+          <br />
           © 2026 MADICRAFT - ขอสงวนลิขสิทธิ์
         </footer>
 
       </div>
-
     </main>
   );
 }
