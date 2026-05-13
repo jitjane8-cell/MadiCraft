@@ -79,8 +79,13 @@ export default function Page() {
       <div className="relative z-10">
 
         {/* HEADER */}
-        <header className="flex justify-between items-center px-6 md:px-10 py-5 md:py-6">
-
+        <header className="
+        sticky top-0 z-50
+        flex justify-between items-center
+        px-6 md:px-10 py-5
+        bg-black/30 backdrop-blur-xl
+        border-b border-white/10
+        ">
           {/* LOGO */}
           <div className="flex flex-col">
             <div className="
@@ -104,29 +109,6 @@ export default function Page() {
           {/* BUTTONS */}
           <div className="flex items-center gap-3">
 
-            {/* LOGIN */}
-            <button
-              className="
-                px-6 py-2.5 rounded-2xl
-                bg-gradient-to-r from-cyan-500/20 to-purple-500/20
-                border border-cyan-400/20
-                text-white font-semibold
-                backdrop-blur-xl
-
-                hover:from-cyan-500/30
-                hover:to-purple-500/30
-                hover:border-cyan-300/40
-                hover:shadow-[0_0_25px_rgba(34,211,238,0.25)]
-                hover:scale-105
-
-                active:scale-95
-
-                transition-all duration-300
-              "
-            >
-              เข้าสู่ระบบ
-            </button>
-
             {/* DISCORD */}
             <button className="
               flex items-center gap-2
@@ -145,7 +127,7 @@ export default function Page() {
         </header>
 
         {/* HERO SECTION */}
-        <section className="relative pt-4 md:pt-10 pb-4 text-center flex flex-col items-center justify-start min-h-[60vh] md:min-h-[65vh] -translate-y-12 md:-translate-y-20">
+        <section className="relative pt-4 md:pt-10 pb-4 text-center flex flex-col items-center justify-start min-h-[60vh] md:min-h-[65vh]">
 
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="w-[600px] h-[600px] bg-cyan-500/20 blur-[140px] rounded-full animate-pulse" />
@@ -153,10 +135,19 @@ export default function Page() {
           </div>
 
           <img 
-            src="/images/8023.png"
-            className="w-[280px] sm:w-[380px] md:w-[600px] relative z-10
+            src="/images/8024.png"
+            className="
+            w-[320px]
+            sm:w-[450px]
+            md:w-[680px]
+            lg:w-[760px]
+            relative z-10
             drop-shadow-[0_0_80px_rgba(34,211,238,0.4)]
-            hover:scale-105 transition duration-700"
+            hover:scale-105
+            transition duration-700
+            select-none
+            pointer-events-none
+            "
           />
 
           {/* PLAY BUTTONS */}
@@ -179,13 +170,10 @@ export default function Page() {
 
             {/* COPY IP BUTTON */}
             <button
-              onClick={async () => {
-                try {
-                  await navigator.clipboard.writeText("play.madicraft.online");
-                  console.log("Copied!");
-                } catch (err) {
-                  console.error("Failed to copy");
-                }
+              onClick={() => {
+                navigator.clipboard.writeText("play.madicraft.online");
+
+                alert("คัดลอก IP เซิร์ฟเวอร์แล้ว!");
               }}
               className="
                 px-6 py-3
@@ -199,7 +187,7 @@ export default function Page() {
                 transition-all duration-300
                 font-medium
                 cursor-pointer
-  "
+              "
             >
               PLAY.MADICRAFT.ONLINE
             </button>
