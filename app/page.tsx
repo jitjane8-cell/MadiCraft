@@ -1,9 +1,27 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Home, ShoppingCart, Wallet, Trophy, BookOpen, Play, MessageCircle } from "lucide-react";
 
 export default function Page() {
+  const [onlineCount, setOnlineCount] = useState(0);
+
+  useEffect(() => {
+    const fetchDiscord = () => {
+      fetch("https://discord.com/api/guilds/1474899729631678557/widget.json")
+        .then((res) => res.json())
+        .then((data) => {
+          setOnlineCount(data.presence_count || 0);
+        });
+    };
+
+    fetchDiscord();
+
+    const interval = setInterval(fetchDiscord, 30000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <main className="min-h-screen bg-[#02040a] text-white overflow-x-hidden">
 
@@ -110,22 +128,46 @@ export default function Page() {
           <div className="flex items-center gap-3">
 
             {/* DISCORD */}
-            <button className="
-              flex items-center gap-2
-              px-5 py-2 rounded-2xl
-              bg-gradient-to-r from-cyan-500 to-purple-600
-              hover:scale-105
-              transition-all duration-300
-              font-medium
-              shadow-[0_0_30px_rgba(34,211,238,0.35)]
-            ">
-              <MessageCircle size={18} />
-              Discord
-            </button>
+            <a
+              href="https://discord.gg/Bu2EbeAe"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="
+                flex items-center gap-4
+                px-6 py-3
+                rounded-2xl
+                bg-gradient-to-r from-cyan-500 to-purple-600
+                hover:scale-105
+                transition-all duration-300
+                shadow-[0_0_35px_rgba(34,211,238,0.35)]
+              "
+            >
+              {/* ICON */}
+              <div className="
+                w-10 h-10
+                rounded-xl
+                bg-white/10
+                flex items-center justify-center
+                backdrop-blur-md
+              ">
+                <MessageCircle size={20} />
+              </div>
+
+              {/* TEXT */}
+              <div className="flex flex-col leading-tight">
+                <span className="font-bold text-white text-sm">
+                   Discord
+                </span>
+
+                <span className="text-[12px] text-cyan-100">
+                  👥 {onlineCount}  Online
+                </span>
+              </div>
+            </a>
 
           </div>
         </header>
-
+        
         {/* HERO SECTION */}
         <section className="relative pt-4 md:pt-10 pb-4 text-center flex flex-col items-center justify-start min-h-[60vh] md:min-h-[65vh]">
 
@@ -154,19 +196,19 @@ export default function Page() {
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-6 md:mt-8 relative z-10">
 
             {/* LOGIN BUTTON */}
-            <button
+            <a
+              href="/login"
               className="
                 px-8 py-3
                 bg-gradient-to-r from-cyan-500 to-purple-600
                 rounded-2xl font-bold
                 hover:scale-105
-                hover:shadow-[0_0_30px_rgba(34,211,238,0.35)]
                 transition-all duration-300
                 flex items-center justify-center gap-2
               "
             >
               เข้าสู่ระบบ
-            </button>
+            </a>
 
             {/* COPY IP BUTTON */}
             <button
