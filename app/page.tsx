@@ -175,22 +175,43 @@ export default function Page() {
             <div className="w-[600px] h-[600px] bg-cyan-500/20 blur-[140px] rounded-full animate-pulse" />
             <div className="w-[500px] h-[500px] bg-purple-500/20 blur-[140px] rounded-full animate-pulse" />
           </div>
+        {/* HERO IMAGE */}
+        <div className="relative z-10 mb-8 group">
 
-          <img 
-            src="/images/8024.png"
+          {/* GLOW */}
+          <div
             className="
-            w-[320px]
-            sm:w-[450px]
-            md:w-[680px]
-            lg:w-[760px]
-            relative z-10
-            drop-shadow-[0_0_80px_rgba(34,211,238,0.4)]
-            hover:scale-105
-            transition duration-700
-            select-none
-            pointer-events-none
+              absolute inset-0
+              bg-cyan-500/20
+              blur-[90px]
+              scale-75
+              opacity-80
+              transition-all duration-500
+              group-hover:scale-90
+              group-hover:opacity-100
             "
           />
+
+          <img
+            src="/images/8024.png"
+            alt="Madicraft Logo"
+            className="
+              w-[320px]
+              sm:w-[450px]
+              md:w-[680px]
+              lg:w-[760px]
+
+              relative z-10
+
+              drop-shadow-[0_0_50px_rgba(34,211,238,0.35)]
+
+              transition-all duration-700 ease-out
+
+              hover:scale-[1.03]
+              hover:-translate-y-1
+            "
+          />
+        </div>
 
           {/* PLAY BUTTONS */}
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-6 md:mt-8 relative z-10">
@@ -241,7 +262,7 @@ export default function Page() {
             <div className="bg-black/40 border border-white/10 backdrop-blur-xl rounded-2xl py-6 px-4 md:px-10 flex flex-wrap justify-between items-center gap-6">
               {[
                 ["🟢 Online", "Status"],
-                ["👥 604 Players", "Online"],
+                ["👥 - Players", "Online"],
                 ["⚡ 1.21 + ", "Version"],
                 ["🔥 24/7", "Uptime"],
               ].map((i, idx) => (
