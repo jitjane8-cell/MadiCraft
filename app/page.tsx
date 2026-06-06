@@ -199,7 +199,7 @@ export default function Page() {
               w-[320px]
               sm:w-[450px]
               md:w-[680px]
-              lg:w-[760px]
+              lg:w-[680px]
 
               relative z-10
 
@@ -294,14 +294,11 @@ export default function Page() {
               <div className="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition text-center">
                 <div className="flex-1">
                   <div className="font-semibold text-white">
-                    🎉 อัปเดตเวอร์ชัน 1.21 พร้อมระบบใหม่
+                    🎉 อัปเดตเวอร์ชันใหม่ล่าสุด พร้อมระบบใหม่
                   </div>
                   <div className="text-sm text-zinc-400">
                     เพิ่มระบบเควส + ของรางวัลใหม่ในเซิร์ฟเวอร์
                   </div>
-                </div>
-                <div className="text-xs text-zinc-500 whitespace-nowrap">
-                  วันนี้
                 </div>
               </div>
 
@@ -309,14 +306,11 @@ export default function Page() {
               <div className="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition text-center">
                 <div className="flex-1">
                   <div className="font-semibold text-white">
-                    🔥 กิจกรรมแจกของพิเศษเริ่มแล้ว
+                    🔥 ภารกิจรายวันสุดง่าย
                   </div>
                   <div className="text-sm text-zinc-400">
-                    เข้าเล่นทุกวันรับ Token ฟรี + ของรางวัลรายวัน
+                    เข้าเล่นทุกวันรับ + ของรางวัลรายวัน
                   </div>
-                </div>
-                <div className="text-xs text-zinc-500 whitespace-nowrap">
-                  2 วันที่แล้ว
                 </div>
               </div>
 
@@ -329,9 +323,6 @@ export default function Page() {
                   <div className="text-sm text-zinc-400">
                     ปรับราคาไอเทมในร้านค้าให้สมดุลมากขึ้น
                   </div>
-                </div>
-                <div className="text-xs text-zinc-500 whitespace-nowrap">
-                  5 วันที่แล้ว
                 </div>
               </div>
 
