@@ -1,20 +1,41 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { X } from "lucide-react";
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
+  const [loading, setLoading] = useState(false);
   const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    console.log("USERNAME:", username);
-    console.log("PASSWORD:", password);
+  setLoading(true);
 
-    alert(`ล็อกอินด้วยชื่อ ${username}`);
-  };
+  const res = await fetch("/api/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ username, password }),
+  });
+
+  let data;
+  try {
+    data = await res.json();
+  } catch {
+    alert("server error");
+    setLoading(false);
+    return;
+  }
+
+  setLoading(false);
+
+  if (data.success) {
+    window.location.href = "/";
+  } else {
+    alert(data.message || "login failed");
+  }
+};
 
   return (
     <main className="min-h-screen bg-[#02040a] text-white flex items-center justify-center overflow-hidden relative">
@@ -39,12 +60,12 @@ export default function LoginPage() {
           shadow-[0_0_50px_rgba(34,211,238,0.15)]
         ">
           {/* CLOSE BUTTON */}
-          <a
+          <Link
             href="/"
             className="
-              absolute top-5 right-5
-              w-10 h-10
-              rounded-xl
+              absolute top-4 right-4
+              w-12 h-12
+              rounded-2xl
               bg-white/5
               border border-white/10
               flex items-center justify-center
@@ -54,8 +75,8 @@ export default function LoginPage() {
               transition-all duration-300
             "
           >
-            <X size={18} />
-          </a>
+            <X size={22} />
+          </Link>
           {/* LOGO */}
           <div className="text-center mb-8">
 
@@ -101,6 +122,7 @@ export default function LoginPage() {
                   focus:bg-white/10
                   transition-all duration-300
                   placeholder:text-zinc-500
+                  active:scale-95
                 "
               />
 
@@ -127,6 +149,7 @@ export default function LoginPage() {
                   focus:bg-white/10
                   transition-all duration-300
                   placeholder:text-zinc-500
+                  active:scale-95
                 "
               />
 
@@ -135,16 +158,18 @@ export default function LoginPage() {
             {/* BUTTON */}
             <button
               type="submit"
+              disabled={loading}
               className="
                 w-full py-4 rounded-2xl
                 font-bold
                 bg-gradient-to-r from-cyan-500 to-purple-600
                 hover:scale-[1.02]
-                hover:shadow-[0_0_40px_rgba(34,211,238,0.35)]
+                active:scale-[0.98]
                 transition-all duration-300
+                disabled:opacity-50
               "
             >
-              เข้าสู่ระบบ
+              {loading ? "กำลังเข้าสู่ระบบ..." : "เข้าสู่ระบบ"}
             </button>
 
           </form>

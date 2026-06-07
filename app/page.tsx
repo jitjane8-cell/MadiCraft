@@ -4,8 +4,14 @@ import React, { useEffect, useState } from "react";
 import { Home, ShoppingCart, Wallet, Trophy, BookOpen, Play, MessageCircle } from "lucide-react";
 
 export default function Page() {
+  const [user, setUser] = useState<string | null>(null);
   const [onlineCount, setOnlineCount] = useState(0);
-
+  
+  const [serverData, setServerData] = useState({
+  online: 0,
+  max: 0,
+  version: "Loading...",
+  });
   useEffect(() => {
     const fetchDiscord = () => {
       fetch("https://discord.com/api/guilds/1474899729631678557/widget.json")
@@ -21,6 +27,33 @@ export default function Page() {
 
     return () => clearInterval(interval);
   }, []);
+useEffect(() => {
+  const cookie = document.cookie
+    .split("; ")
+    .find((c) => c.startsWith("mc_user="))
+    ?.split("=")[1];
+
+  if (cookie) {
+    setUser(cookie);
+  }
+}, []);
+  useEffect(() => {
+  const fetchServer = () => {
+    fetch("/api/server")
+      .then((res) => res.json())
+      .then((data) => {
+        setServerData(data);
+      })
+      .catch(console.error);
+  };
+
+  fetchServer();
+
+  const interval = setInterval(fetchServer, 30000);
+
+  return () => clearInterval(interval);
+}, []);
+  
 
   return (
     <main className="min-h-screen bg-[#02040a] text-white overflow-x-hidden">
@@ -217,19 +250,29 @@ export default function Page() {
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-6 md:mt-8 relative z-10">
 
             {/* LOGIN BUTTON */}
-            <a
-              href="/login"
-              className="
-                px-8 py-3
-                bg-gradient-to-r from-cyan-500 to-purple-600
-                rounded-2xl font-bold
-                hover:scale-105
-                transition-all duration-300
-                flex items-center justify-center gap-2
-              "
-            >
-              เข้าสู่ระบบ
-            </a>
+            {user ? (
+              <div className="flex items-center gap-3 px-4 py-2 rounded-2xl bg-white/5 border border-white/10">
+                
+                {/* SKIN HEAD */}
+                <img
+                  src={`https://mc-heads.net/avatar/${user}/100`}
+                  className="w-10 h-10 rounded-lg"
+                />
+
+                <div className="flex flex-col leading-tight">
+                  <span className="font-bold text-sm">{user}</span>
+                  <span className="text-xs text-zinc-400">Player</span>
+                </div>
+
+              </div>
+            ) : (
+              <a
+                href="/login"
+                className="px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-2xl font-bold"
+              >
+                เข้าสู่ระบบ
+              </a>
+            )}
 
             {/* COPY IP BUTTON */}
             <button
@@ -261,14 +304,21 @@ export default function Page() {
           <div className="mt-12 md:mt-16 w-full max-w-5xl px-6 relative z-10 mx-auto">
             <div className="bg-black/40 border border-white/10 backdrop-blur-xl rounded-2xl py-6 px-4 md:px-10 flex flex-wrap justify-between items-center gap-6">
               {[
-                ["🟢 Online", "Status"],
-                ["👥 - Players", "Online"],
+                [
+                  serverData.version === "Offline"
+                    ? "🔴 Offline"
+                    : "🟢 Online",
+                  "Status",
+                ],
+                [`👥 ${serverData.online} / ${serverData.max}`, "Online"],
                 ["⚡ 1.21 + ", "Version"],
                 ["🔥 24/7", "Uptime"],
               ].map((i, idx) => (
                 <div key={idx} className="flex flex-col items-center md:items-start">
                   <div className="text-lg font-bold">{i[0]}</div>
-                  <div className="text-zinc-400 text-xs uppercase tracking-widest">{i[1]}</div>
+                  <div className="text-zinc-400 text-xs uppercase tracking-widest">
+                    {i[1]}
+                  </div>
                 </div>
               ))}
             </div>
