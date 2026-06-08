@@ -78,124 +78,166 @@ useEffect(() => {
         ))}
       </div>
 
-      {/* SIDE NAV (desktop) */}
-      <nav className="fixed left-6 top-1/2 -translate-y-1/2 z-50 hidden lg:flex flex-col gap-10">
-        {[
-          [<Home />, "หน้าหลัก"],
-          [<BookOpen />, "คู่มือ"],
-          [<ShoppingCart />, "ร้านค้า"],
-          [<Wallet />, "เติมเงิน"],
-          [<Trophy />, "อันดับ"],
-        ].map((i, idx) => (
-          <div key={idx} className="group relative">
-            <button 
-              className="
-                w-14 h-14 rounded-2xl
-                bg-white/5 border border-white/10
-                flex items-center justify-center
-                hover:bg-cyan-500/20
-                hover:border-cyan-400/40
-                hover:shadow-[0_0_25px_rgba(34,211,238,0.35)]
-                hover:scale-110
-                transition-all duration-300
-              "
-            >
-              {i[0]}
-            </button>
-            <span
-              className="
-                absolute left-16 top-1/2 -translate-y-1/2
-                px-4 py-2 rounded-xl
-                bg-black/70 backdrop-blur-xl
-                border border-white/10
-                text-white text-sm font-medium tracking-wide
-                opacity-0 translate-x-2
-                group-hover:opacity-100
-                group-hover:translate-x-0
-                transition-all duration-300
-                whitespace-nowrap
-                shadow-[0_0_20px_rgba(0,0,0,0.35)]
-              "
-            >
-              {i[1]}
-            </span>
-          </div>
-        ))}
-      </nav>
-
       {/* CONTENT */}
       <div className="relative z-10">
 
         {/* HEADER */}
-        <header className="
-        sticky top-0 z-50
-        flex justify-between items-center
-        px-6 md:px-10 py-5
-        bg-black/30 backdrop-blur-xl
-        border-b border-white/10
-        ">
+        <header
+          className="
+            sticky top-0 z-50
+            grid grid-cols-3
+            items-center
+            px-8 py-5
+            bg-black/30 backdrop-blur-xl
+            border-b border-white/10
+          "
+        >
+
           {/* LOGO */}
-          <div className="flex flex-col">
-            <div className="
-              font-black text-2xl tracking-tight
-              bg-gradient-to-r from-cyan-300 via-white to-purple-400
-              bg-clip-text text-transparent
-              drop-shadow-[0_0_20px_rgba(34,211,238,0.35)]
-            ">
+          <div className="flex flex-col translate-x-85">
+            <div
+              className="
+                font-black text-2xl tracking-tight
+                bg-gradient-to-r from-cyan-300 via-white to-purple-400
+                bg-clip-text text-transparent
+              "
+            >
               MADICRAFT
             </div>
 
-            <div className="
-              text-[10px] text-zinc-400
-              tracking-[0.35em] uppercase
-              text-center mt-[-2px]
-            ">
+            <div className="text-[10px] text-zinc-400 tracking-[0.35em] uppercase">
               JAVA & BEDROCK
             </div>
           </div>
 
-          {/* BUTTONS */}
-          <div className="flex items-center gap-3">
+          {/* CENTER MENU */}
+          <nav className="hidden lg:flex items-center justify-center gap-8">
 
-            {/* DISCORD */}
             <a
-              href="https://discord.gg/rGsa43aAQc"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="
-                flex items-center gap-4
-                px-6 py-3
-                rounded-2xl
-                bg-gradient-to-r from-cyan-500 to-purple-600
-                hover:scale-105
-                transition-all duration-300
-                shadow-[0_0_35px_rgba(34,211,238,0.35)]
-              "
+              href="/"
+              className="flex items-center gap-2 hover:text-cyan-400 transition"
             >
-              {/* ICON */}
-              <div className="
-                w-10 h-10
-                rounded-xl
-                bg-white/10
-                flex items-center justify-center
-                backdrop-blur-md
-              ">
-                <MessageCircle size={20} />
-              </div>
-
-              {/* TEXT */}
-              <div className="flex flex-col leading-tight">
-                <span className="font-bold text-white text-sm">
-                   Discord
-                </span>
-
-                <span className="text-[12px] text-cyan-100">
-                  👥 {onlineCount}  Online
-                </span>
-              </div>
+              <Home size={18} />
+              หน้าหลัก
             </a>
 
-          </div>
+            <a
+              href="/guide"
+              className="flex items-center gap-2 hover:text-cyan-400 transition"
+            >
+              <BookOpen size={18} />
+              คู่มือ
+            </a>
+
+            <a
+              href="/shop"
+              className="flex items-center gap-2 hover:text-cyan-400 transition"
+            >
+              <ShoppingCart size={18} />
+              ร้านค้า
+            </a>
+
+            <a
+              href="/topup"
+              className="flex items-center gap-2 hover:text-cyan-400 transition"
+            >
+              <Wallet size={18} />
+              เติมเงิน
+            </a>
+
+            <a
+              href="/leaderboard"
+              className="flex items-center gap-2 hover:text-cyan-400 transition"
+            >
+              <Trophy size={18} />
+              อันดับ
+            </a>
+
+          </nav>
+
+          {/* RIGHT */}
+          <div className="flex items-center gap-3">
+
+          {/* LOGIN */}
+          {!user ? (
+            <a
+              href="/login"
+              className="
+                px-5 py-3
+                rounded-2xl
+                bg-gradient-to-r
+                from-cyan-500
+                to-purple-600
+                font-bold
+                hover:scale-105
+                transition
+              "
+            >
+              เข้าสู่ระบบ
+            </a>
+          ) : (
+            <div className="flex items-center gap-3 px-3 py-2 rounded-2xl bg-white/5 border border-white/10">
+
+              <img
+                src={`https://mc-heads.net/avatar/${user}/100`}
+                className="w-9 h-9 rounded-lg"
+              />
+
+              <span className="font-semibold">
+                {user}
+              </span>
+
+            </div>
+          )}
+
+          {/* COPY IP */}
+          <button
+            onClick={() => {
+              navigator.clipboard.writeText("play.madicraft.online");
+              alert("คัดลอก IP แล้ว");
+            }}
+            className="
+              px-5 py-3
+              rounded-2xl
+              bg-white/5
+              border border-white/10
+              hover:bg-white/10
+              transition
+            "
+          >
+            PLAY.MADICRAFT.ONLINE
+          </button>
+
+          {/* DISCORD */}
+          <a
+            href="https://discord.gg/rGsa43aAQc"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="
+              flex items-center gap-4
+              px-6 py-3
+              rounded-2xl
+              bg-gradient-to-r
+              from-cyan-500
+              to-purple-600
+            "
+          >
+            <MessageCircle size={20} />
+
+            <div className="flex flex-col leading-tight">
+              <span className="font-bold text-sm">
+                Discord
+              </span>
+
+              <span className="text-xs">
+                👥 {onlineCount} Online
+              </span>
+            </div>
+
+          </a>
+
+        </div>
+
         </header>
         
         {/* HERO SECTION */}
@@ -245,75 +287,6 @@ useEffect(() => {
 
           {/* PLAY BUTTONS */}
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-6 md:mt-8 relative z-10">
-
-            {/* LOGIN BUTTON */}
-            {user ? (
-              <div className="flex items-center gap-3">
-
-                <div className="flex items-center gap-3 px-4 py-2 rounded-2xl bg-white/5 border border-white/10">
-
-                  <img
-                    src={`https://mc-heads.net/avatar/${user}/100`}
-                    className="w-10 h-10 rounded-lg"
-                  />
-
-                  <div className="flex flex-col leading-tight">
-                    <span className="font-bold text-sm">{user}</span>
-                    <span className="text-xs text-zinc-400">Player</span>
-                  </div>
-
-                </div>
-
-                <button
-                  onClick={() => {
-                    localStorage.removeItem("mc_user");
-                    setUser(null);
-                  }}
-                  className="
-                    px-4 py-2
-                    rounded-2xl
-                    bg-red-500/20
-                    border border-red-500/30
-                    hover:bg-red-500/30
-                    transition-all
-                  "
-                >
-                  Logout
-                </button>
-
-              </div>
-            ) : (
-              <a
-                href="/login"
-                className="px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-2xl font-bold"
-              >
-                เข้าสู่ระบบ
-              </a>
-            )}
-
-            {/* COPY IP BUTTON */}
-            <button
-              onClick={() => {
-                navigator.clipboard.writeText("play.madicraft.online");
-
-                alert("คัดลอก IP เซิร์ฟเวอร์แล้ว!");
-              }}
-              className="
-                px-6 py-3
-                bg-white/5
-                border border-white/10
-                backdrop-blur-md
-                rounded-2xl
-                hover:bg-white/10
-                hover:border-cyan-400/30
-                hover:shadow-[0_0_25px_rgba(34,211,238,0.2)]
-                transition-all duration-300
-                font-medium
-                cursor-pointer
-              "
-            >
-              PLAY.MADICRAFT.ONLINE
-            </button>
 
           </div>
 
