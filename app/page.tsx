@@ -159,7 +159,7 @@ useEffect(() => {
 
             {/* DISCORD */}
             <a
-              href="https://discord.gg/Bu2EbeAe"
+              href="https://discord.gg/rGsa43aAQc"
               target="_blank"
               rel="noopener noreferrer"
               className="
