@@ -248,18 +248,38 @@ useEffect(() => {
 
             {/* LOGIN BUTTON */}
             {user ? (
-              <div className="flex items-center gap-3 px-4 py-2 rounded-2xl bg-white/5 border border-white/10">
-                
-                {/* SKIN HEAD */}
-                <img
-                  src={`https://mc-heads.net/avatar/${user}/100`}
-                  className="w-10 h-10 rounded-lg"
-                />
+              <div className="flex items-center gap-3">
 
-                <div className="flex flex-col leading-tight">
-                  <span className="font-bold text-sm">{user}</span>
-                  <span className="text-xs text-zinc-400">Player</span>
+                <div className="flex items-center gap-3 px-4 py-2 rounded-2xl bg-white/5 border border-white/10">
+
+                  <img
+                    src={`https://mc-heads.net/avatar/${user}/100`}
+                    className="w-10 h-10 rounded-lg"
+                  />
+
+                  <div className="flex flex-col leading-tight">
+                    <span className="font-bold text-sm">{user}</span>
+                    <span className="text-xs text-zinc-400">Player</span>
+                  </div>
+
                 </div>
+
+                <button
+                  onClick={() => {
+                    localStorage.removeItem("mc_user");
+                    setUser(null);
+                  }}
+                  className="
+                    px-4 py-2
+                    rounded-2xl
+                    bg-red-500/20
+                    border border-red-500/30
+                    hover:bg-red-500/30
+                    transition-all
+                  "
+                >
+                  Logout
+                </button>
 
               </div>
             ) : (
