@@ -11,30 +11,36 @@ export default function LoginPage() {
   const handleLogin = async (e: React.FormEvent) => {
   e.preventDefault();
 
-  setLoading(true);
-
-  const res = await fetch("/api/login", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, password }),
-  });
-
-  let data;
-  try {
-    data = await res.json();
-  } catch {
-    alert("server error");
-    setLoading(false);
+  if (!username || !password) {
+    alert("กรอกข้อมูลให้ครบ");
     return;
   }
 
-  setLoading(false);
+  try {
+    setLoading(true);
 
-  if (data.success) {
-    window.location.href = "/";
-  } else {
-    alert(data.message || "login failed");
+    const res = await fetch("/api/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username: username.trim(), password }),
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      localStorage.setItem("mc_user", username);
+      window.location.href = "/";
+    } else {
+      alert("ชื่อหรือรหัสผ่านไม่ถูกต้อง");
+    }
+  } catch (err) {
+    console.error(err);
+    alert("เกิดข้อผิดพลาด");
+  } finally {
+    setLoading(false);
+    
   }
+  
 };
 
   return (

@@ -28,13 +28,10 @@ export default function Page() {
     return () => clearInterval(interval);
   }, []);
 useEffect(() => {
-  const cookie = document.cookie
-    .split("; ")
-    .find((c) => c.startsWith("mc_user="))
-    ?.split("=")[1];
+  const username = localStorage.getItem("mc_user");
 
-  if (cookie) {
-    setUser(cookie);
+  if (username) {
+    setUser(username);
   }
 }, []);
   useEffect(() => {

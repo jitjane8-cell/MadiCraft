@@ -1,62 +1,83 @@
-export const runtime = "nodejs";
-
 import { NextResponse } from "next/server";
 import mysql from "mysql2/promise";
 import crypto from "crypto";
 
-function sha256(input: string) {
-  return crypto.createHash("sha256").update(input).digest("hex");
+function authmeSha(password: string, salt: string) {
+  const first = crypto
+    .createHash("sha256")
+    .update(password)
+    .digest("hex");
+
+  return crypto
+    .createHash("sha256")
+    .update(first + salt)
+    .digest("hex");
 }
 
 export async function POST(req: Request) {
   try {
     const { username, password } = await req.json();
 
-    if (!username || !password) {
-      return NextResponse.json({ success: false, message: "missing data" });
-    }
-
     const db = await mysql.createConnection({
-      host: "127.0.0.1",
-      user: "root",
-      password: "",
+      host: "143.20.142.213",
+      user: "web",
+      password: "MadiWeb123!",
       database: "authme",
     });
 
     const [rows]: any = await db.execute(
-      "SELECT password FROM authme WHERE username = ? LIMIT 1",
+      "SELECT password FROM authme WHERE username = ?",
       [username]
     );
 
     await db.end();
 
-    if (!rows || rows.length === 0) {
-      return NextResponse.json({ success: false, message: "user not found" });
+    if (rows.length === 0) {
+      console.log(rows[0]);
+      return NextResponse.json({
+        success: false,
+        message: "ไม่พบผู้เล่น",
+      });
     }
 
-    const dbPass = rows[0].password;
+    const stored = rows[0].password;
 
-    if (!dbPass || !dbPass.includes("$")) {
-      return NextResponse.json({ success: false, message: "bad hash format" });
+    const parts = stored.split("$");
+
+    if (parts.length !== 4) {
+      return NextResponse.json({
+        success: false,
+        message: "รูปแบบรหัสผ่านไม่ถูกต้อง",
+      });
     }
 
-    const parts = dbPass.split("$");
     const salt = parts[2];
     const hash = parts[3];
 
-    const inputHash = sha256(password + salt);
+    const testHash = authmeSha(password, salt);
 
-    if (inputHash !== hash) {
-      return NextResponse.json({ success: false, message: "wrong password" });
+    console.log("username =", username);
+    console.log("salt =", salt);
+    console.log("stored =", hash);
+    console.log("test =", testHash);
+
+    if (testHash !== hash) {
+      return NextResponse.json({
+        success: false,
+        message: "รหัสผ่านไม่ถูกต้อง",
+      });
     }
 
-    return NextResponse.json({ success: true });
-
+    return NextResponse.json({
+      success: true,
+      username,
+    });
   } catch (err) {
-    console.error("LOGIN ERROR:", err);
-    return NextResponse.json(
-      { success: false, message: "server error" },
-      { status: 500 }
-    );
+    console.error(err);
+
+    return NextResponse.json({
+      success: false,
+      message: "Server Error",
+    });
   }
 }
