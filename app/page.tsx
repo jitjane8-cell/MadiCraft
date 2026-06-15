@@ -1,7 +1,15 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Home, ShoppingCart, Wallet, Trophy, BookOpen, Play, MessageCircle } from "lucide-react";
+import {
+  Home,
+  ShoppingCart,
+  Wallet,
+  Trophy,
+  BookOpen,
+  MessageCircle,
+  Gamepad2
+} from "lucide-react";
 
 export default function Page() {
   const [user, setUser] = useState<string | null>(null);
@@ -85,33 +93,49 @@ useEffect(() => {
         <header
           className="
             sticky top-0 z-50
-            grid grid-cols-3
+            grid grid-cols-[220px_1fr_320px]
             items-center
-            px-8 py-5
-            bg-black/30 backdrop-blur-xl
+            px-8 py-4
+            bg-black/40
+            backdrop-blur-xl
             border-b border-white/10
           "
         >
 
           {/* LOGO */}
-          <div className="flex flex-col translate-x-85">
+          <div className="flex flex-col items-center">
             <div
               className="
-                font-black text-2xl tracking-tight
-                bg-gradient-to-r from-cyan-300 via-white to-purple-400
-                bg-clip-text text-transparent
+                font-black text-3xl tracking-tight
+                bg-gradient-to-r
+                from-cyan-300
+                via-white
+                to-purple-400
+                bg-clip-text
+                text-transparent
+                drop-shadow-[0_0_20px_rgba(255,255,255,0.15)]
               "
             >
               MADICRAFT
             </div>
 
-            <div className="text-[10px] text-zinc-400 tracking-[0.35em] uppercase">
+            <div
+              className="
+                text-[10px]
+                text-purple-300
+                tracking-[0.35em]
+                uppercase
+                mt-[-2px]
+                text-center
+                w-full
+              "
+            >
               JAVA & BEDROCK
             </div>
           </div>
 
           {/* CENTER MENU */}
-          <nav className="hidden lg:flex items-center justify-center gap-8">
+          <nav className="hidden lg:flex items-center justify-center gap-8 justify-self-center">
 
             <a
               href="/"
@@ -156,39 +180,64 @@ useEffect(() => {
           </nav>
 
           {/* RIGHT */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 justify-self-end">
 
-          {/* LOGIN */}
-          {!user ? (
-            <a
-              href="/login"
-              className="
-                px-5 py-3
-                rounded-2xl
-                bg-gradient-to-r
-                from-cyan-500
-                to-purple-600
-                font-bold
-                hover:scale-105
-                transition
-              "
-            >
-              เข้าสู่ระบบ
-            </a>
-          ) : (
-            <div className="flex items-center gap-3 px-3 py-2 rounded-2xl bg-white/5 border border-white/10">
+{/* LOGIN / PROFILE */}
+{!user ? (
+  <a
+    href="/login"
+    className="
+      px-4 py-2
+      rounded-xl
+      bg-gradient-to-r
+      from-cyan-500
+      to-purple-600
+      text-sm
+      font-semibold
+      whitespace-nowrap
+      hover:scale-105
+      transition-all
+      shadow-[0_0_15px_rgba(168,85,247,0.35)]
+    "
+  >
+    เข้าสู่ระบบ
+  </a>
+) : (
+  <div
+    className="
+      flex items-center gap-2
+      px-3 py-2
+      rounded-xl
+      bg-white/5
+      border border-white/10
+      whitespace-nowrap
+    "
+  >
+    <img
+      src={`https://mc-heads.net/avatar/${user}/100`}
+      className="w-8 h-8 rounded-lg"
+      alt={user}
+    />
 
-              <img
-                src={`https://mc-heads.net/avatar/${user}/100`}
-                className="w-9 h-9 rounded-lg"
-              />
+    <span className="font-semibold text-sm">
+      {user}
+    </span>
 
-              <span className="font-semibold">
-                {user}
-              </span>
-
-            </div>
-          )}
+    <button
+      onClick={() => {
+        localStorage.removeItem("mc_user");
+        setUser(null);
+      }}
+      className="
+        text-red-400
+        hover:text-red-300
+        text-xs
+      "
+    >
+      Logout
+    </button>
+  </div>
+)}
 
           {/* COPY IP */}
           <button
@@ -197,14 +246,19 @@ useEffect(() => {
               alert("คัดลอก IP แล้ว");
             }}
             className="
-              px-5 py-3
-              rounded-2xl
+              flex items-center gap-2
+              px-4 py-2
+              rounded-xl
               bg-white/5
-              border border-white/10
-              hover:bg-white/10
-              transition
+              border border-cyan-500/20
+              hover:border-cyan-400/50
+              hover:bg-cyan-500/10
+              transition-all
+              font-semibold
+              text-sm
             "
           >
+            <Gamepad2 size={16} />
             PLAY.MADICRAFT.ONLINE
           </button>
 
@@ -213,14 +267,17 @@ useEffect(() => {
             href="https://discord.gg/rGsa43aAQc"
             target="_blank"
             rel="noopener noreferrer"
-            className="
+              className="
               flex items-center gap-4
               px-6 py-3
               rounded-2xl
               bg-gradient-to-r
               from-cyan-500
               to-purple-600
-            "
+              shadow-[0_0_25px_rgba(34,211,238,0.35)]
+              hover:scale-105
+              transition-all
+              "
           >
             <MessageCircle size={20} />
 
@@ -241,7 +298,7 @@ useEffect(() => {
         </header>
         
         {/* HERO SECTION */}
-        <section className="relative pt-4 md:pt-10 pb-4 text-center flex flex-col items-center justify-start min-h-[60vh] md:min-h-[65vh]">
+        <section className="relative pt-4 md:pt-10 pb-4 text-center flex flex-col items-center justify-start min-h-[60vh] md:min-h-[55vh]">
 
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="w-[600px] h-[600px] bg-cyan-500/20 blur-[140px] rounded-full animate-pulse" />
@@ -305,7 +362,7 @@ useEffect(() => {
                 ["🔥 24/7", "Uptime"],
               ].map((i, idx) => (
                 <div key={idx} className="flex flex-col items-center md:items-start">
-                  <div className="text-lg font-bold">{i[0]}</div>
+                  <div className="text-2xl font-bold">{i[0]}</div>
                   <div className="text-zinc-400 text-xs uppercase tracking-widest">
                     {i[1]}
                   </div>
@@ -331,7 +388,7 @@ useEffect(() => {
             <div className="space-y-4 text-center">
 
               {/* ITEM 1 */}
-              <div className="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition text-center">
+              <div className="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-white/5 hover:border-cyan-500/20 border border-transparent transition text-center">
                 <div className="flex-1">
                   <div className="font-semibold text-white">
                     🎉 อัปเดตเวอร์ชันใหม่ล่าสุด พร้อมระบบใหม่
