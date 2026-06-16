@@ -95,15 +95,8 @@ useEffect(() => {
       <div className="relative z-10">
 {/* MOBILE HEADER */}
 <div className="lg:hidden sticky top-0 z-50">
-  <div
-    className="
-      flex items-center justify-between
-      px-4 py-3
-      bg-black/50
-      backdrop-blur-xl
-      border-b border-white/10
-    "
-  >
+  <div className="flex items-center justify-between px-4 py-3 bg-black/50 backdrop-blur-xl border-b border-white/10">
+
     <div>
       <div className="font-black text-xl bg-gradient-to-r from-cyan-300 to-purple-400 bg-clip-text text-transparent">
         MADICRAFT
@@ -115,20 +108,20 @@ useEffect(() => {
     </div>
 
     {!user ? (
-      <a
-        href="/login"
-        className="
-          px-4 py-2
-          rounded-xl
-          bg-gradient-to-r
-          from-cyan-500
-          to-purple-600
-          text-sm
-        "
-      >
-        Login
-      </a>
+
+      <div className="flex items-center gap-2">
+
+        <a
+          href="/login"
+          className="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-purple-600 text-sm"
+        >
+          Login
+        </a>
+
+      </div>
+
     ) : (
+
       <div
         onClick={() => setMenuOpen(!menuOpen)}
         className="flex items-center gap-2"
@@ -140,22 +133,24 @@ useEffect(() => {
 
         <Menu size={18} />
       </div>
+
     )}
+
   </div>
 </div>
-
         {/* HEADER */}
-        <header
-          className="
-            sticky top-0 z-50
-            grid grid-cols-[220px_1fr_320px]
-            items-center
-            px-8 py-4
-            bg-black/40
-            backdrop-blur-xl
-            border-b border-white/10
-          "
-        >
+<header
+  className="
+    hidden lg:grid
+    sticky top-0 z-50
+    grid-cols-[220px_1fr_320px]
+    items-center
+    px-8 py-4
+    bg-black/40
+    backdrop-blur-xl
+    border-b border-white/10
+  "
+>
 
           {/* LOGO */}
           <div className="flex flex-col items-center">
@@ -440,10 +435,10 @@ useEffect(() => {
             src="/images/8024.png"
             alt="Madicraft Logo"
             className="
-              w-[260px]
-              sm:w-[350px]
-              md:w-[680px]
-              lg:w-[680px]
+w-[220px]
+sm:w-[320px]
+md:w-[680px]
+lg:w-[680px]
 
               relative z-10
 
@@ -458,13 +453,51 @@ useEffect(() => {
         </div>
 
           {/* PLAY BUTTONS */}
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-6 md:mt-8 relative z-10">
+          <div className="mt-6 md:mt-8 relative z-10">
+          <div className="lg:hidden w-full max-w-md px-4">
+  <button
+    onClick={() => {
+      navigator.clipboard.writeText("play.madicraft.online");
+      alert("คัดลอก IP แล้ว");
+    }}
+    className="
+      w-full
+      py-4
+      rounded-2xl
+      bg-gradient-to-r
+      from-cyan-500
+      to-purple-600
+      font-bold
+      text-lg
+      shadow-[0_0_25px_rgba(34,211,238,0.35)]
+    "
+  >
+    🎮 PLAY.MADICRAFT.ONLINE
+  </button>
+</div>
 
           </div>
 
           {/* STATUS BAR - ทำเป็นแถบยาวตามรูปตัวอย่าง */}
           <div className="mt-12 md:mt-16 w-full max-w-5xl px-6 relative z-10 mx-auto">
-            <div className="bg-black/40 border border-white/10 backdrop-blur-xl rounded-2xl py-6 px-4 md:px-10 flex flex-wrap justify-between items-center gap-6">
+            <div
+  className="
+    bg-black/40
+    border border-white/10
+    backdrop-blur-xl
+    rounded-2xl
+    py-6
+    px-4
+    md:px-10
+
+    grid
+    grid-cols-2
+    gap-5
+
+    md:flex
+    md:justify-between
+  "
+>
               {[
                 [
                   serverData.version === "Offline"
