@@ -93,6 +93,56 @@ useEffect(() => {
 
       {/* CONTENT */}
       <div className="relative z-10">
+{/* MOBILE HEADER */}
+<div className="lg:hidden sticky top-0 z-50">
+  <div
+    className="
+      flex items-center justify-between
+      px-4 py-3
+      bg-black/50
+      backdrop-blur-xl
+      border-b border-white/10
+    "
+  >
+    <div>
+      <div className="font-black text-xl bg-gradient-to-r from-cyan-300 to-purple-400 bg-clip-text text-transparent">
+        MADICRAFT
+      </div>
+
+      <div className="text-[9px] tracking-[0.2em] text-zinc-400">
+        JAVA & BEDROCK
+      </div>
+    </div>
+
+    {!user ? (
+      <a
+        href="/login"
+        className="
+          px-4 py-2
+          rounded-xl
+          bg-gradient-to-r
+          from-cyan-500
+          to-purple-600
+          text-sm
+        "
+      >
+        Login
+      </a>
+    ) : (
+      <div
+        onClick={() => setMenuOpen(!menuOpen)}
+        className="flex items-center gap-2"
+      >
+        <img
+          src={`https://mc-heads.net/avatar/${user}/100`}
+          className="w-10 h-10 rounded-xl"
+        />
+
+        <Menu size={18} />
+      </div>
+    )}
+  </div>
+</div>
 
         {/* HEADER */}
         <header
@@ -390,8 +440,8 @@ useEffect(() => {
             src="/images/8024.png"
             alt="Madicraft Logo"
             className="
-              w-[320px]
-              sm:w-[450px]
+              w-[260px]
+              sm:w-[350px]
               md:w-[680px]
               lg:w-[680px]
 
