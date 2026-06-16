@@ -57,30 +57,34 @@ export default function LoginPage() {
       {/* LOGIN CARD */}
       <div className="relative z-10 w-full max-w-md px-6">
 
-        <div className="
-          bg-white/5
-          border border-white/10
-          backdrop-blur-2xl
-          rounded-3xl
-          p-8
-          shadow-[0_0_50px_rgba(34,211,238,0.15)]
-        ">
+<div
+  className="
+    relative
+    bg-white/5
+    border border-white/10
+    backdrop-blur-2xl
+    rounded-3xl
+    p-8
+    shadow-[0_0_50px_rgba(34,211,238,0.15)]
+  "
+>
           {/* CLOSE BUTTON */}
-          <Link
-            href="/"
-            className="
-              absolute top-4 right-4
-              w-12 h-12
-              rounded-2xl
-              bg-white/5
-              border border-white/10
-              flex items-center justify-center
-              hover:bg-red-500/20
-              hover:border-red-400/40
-              hover:scale-110
-              transition-all duration-300
-            "
-          >
+<Link
+  href="/"
+  className="
+    absolute top-4 right-4
+    z-50
+    w-12 h-12
+    rounded-2xl
+    bg-white/5
+    border border-white/10
+    flex items-center justify-center
+    hover:bg-red-500/20
+    hover:border-red-400/40
+    hover:scale-110
+    transition-all duration-300
+  "
+>
             <X size={22} />
           </Link>
           {/* LOGO */}
@@ -103,20 +107,58 @@ export default function LoginPage() {
             </p>
 
           </div>
+{/* INFO BOX */}
+<div
+  className="
+    mb-6
+    rounded-2xl
+    border border-cyan-500/20
+    bg-cyan-500/5
+    p-4
+  "
+>
+  <div className="font-semibold text-cyan-300 mb-3">
+    ℹ️ คำแนะนำก่อนเข้าสู่ระบบ
+  </div>
 
+  <div className="space-y-3 text-sm">
+
+    <div className="rounded-xl bg-white/5 p-3">
+      <div className="font-medium text-green-400">
+        Java Edition
+      </div>
+      <div className="text-zinc-400">
+        ใช้ชื่อปกติ เช่น
+        <span className="text-white ml-1">MadiCraft</span>
+      </div>
+    </div>
+
+    <div className="rounded-xl bg-white/5 p-3">
+      <div className="font-medium text-cyan-400">
+        Bedrock Edition
+      </div>
+      <div className="text-zinc-400">
+        ต้องใส่ _
+        หน้าชื่อ เช่น
+        <span className="text-white ml-1">_MadiCraft</span>
+      </div>
+    </div>
+
+  </div>
+</div>
           {/* FORM */}
           <form onSubmit={handleLogin} className="space-y-5">
 
             {/* USERNAME */}
             <div>
-
+                
               <label className="text-sm text-zinc-300 mb-2 block">
                 ชื่อในเกม Minecraft
               </label>
 
               <input
                 type="text"
-                placeholder="เช่น MadiCraft"
+                placeholder="เช่น MadiCraft หรือ _MadiCraft"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 className="
@@ -129,6 +171,7 @@ export default function LoginPage() {
                   transition-all duration-300
                   placeholder:text-zinc-500
                   active:scale-95
+                  
                 "
               />
 
@@ -157,8 +200,11 @@ export default function LoginPage() {
                   placeholder:text-zinc-500
                   active:scale-95
                 "
+                
               />
-
+<div className="text-center text-sm text-zinc-500 mt-4">
+  ลืมรหัสผ่าน? ติดต่อทีมงานผ่าน Discord
+</div>
             </div>
 
             {/* BUTTON */}
@@ -185,7 +231,7 @@ export default function LoginPage() {
             mt-6 text-center text-sm
             text-zinc-400 leading-relaxed
           ">
-            ใช้ชื่อและรหัสเดียวกับที่สมัครในเซิร์ฟเวอร์ Minecraft
+            ใช้ชื่อและรหัสเดียวกับที่สมัครในเซิร์ฟเวอร์ MadiCraft
           </div>
 
         </div>

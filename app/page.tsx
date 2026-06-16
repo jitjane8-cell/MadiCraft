@@ -8,11 +8,16 @@ import {
   Trophy,
   BookOpen,
   MessageCircle,
-  Gamepad2
+  Gamepad2,
+  Menu,
+  User,
+  LogOut,
+  Settings
 } from "lucide-react";
 
 export default function Page() {
   const [user, setUser] = useState<string | null>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [onlineCount, setOnlineCount] = useState(0);
   
   const [serverData, setServerData] = useState({
@@ -194,48 +199,108 @@ useEffect(() => {
       to-purple-600
       text-sm
       font-semibold
-      whitespace-nowrap
       hover:scale-105
       transition-all
-      shadow-[0_0_15px_rgba(168,85,247,0.35)]
+      whitespace-nowrap
     "
   >
     เข้าสู่ระบบ
   </a>
 ) : (
+  <div className="relative">
+    
+<div
+  onClick={() => setMenuOpen(!menuOpen)}
+  className="
+    flex items-center gap-8
+    cursor-pointer
+    px-3 py-1
+    rounded-xl
+    hover:bg-white/5
+  "
+>
+  <img
+    src={`https://mc-heads.net/avatar/${user}/100`}
+    className="w-10 h-10 rounded-xl"
+  />
+
+  <Menu size={16} />
+</div>
+
+{menuOpen && (
   <div
     className="
-      flex items-center gap-2
-      px-3 py-2
-      rounded-xl
-      bg-white/5
+      absolute
+      top-full
+      mt-2
+      right-0
+      w-60
+      rounded-2xl
+      bg-[#090d16]
       border border-white/10
-      whitespace-nowrap
+      backdrop-blur-xl
+      shadow-2xl
+      overflow-hidden
+      z-[999]
     "
   >
-    <img
-      src={`https://mc-heads.net/avatar/${user}/100`}
-      className="w-8 h-8 rounded-lg"
-      alt={user}
-    />
+        <div className="p-4 border-b border-white/10">
+          <div className="font-semibold">{user}</div>
+          <div className="text-xs text-zinc-400">
+            Minecraft Account
+          </div>
+        </div>
 
-    <span className="font-semibold text-sm">
-      {user}
-    </span>
+        <a
+          href="/profile"
+          className="flex items-center gap-3 px-4 py-3 hover:bg-white/5"
+        >
+          <User size={16} />
+          โปรไฟล์
+        </a>
 
-    <button
-      onClick={() => {
-        localStorage.removeItem("mc_user");
-        setUser(null);
-      }}
-      className="
-        text-red-400
-        hover:text-red-300
-        text-xs
-      "
-    >
-      Logout
-    </button>
+        <a
+          href="/topup"
+          className="flex items-center gap-3 px-4 py-3 hover:bg-white/5"
+        >
+          <Wallet size={16} />
+          เติมเงิน
+        </a>
+
+        <a
+          href="/madipass"
+          className="flex items-center gap-3 px-4 py-3 hover:bg-white/5"
+        >
+          🎁
+          MadiPass
+        </a>
+
+        <a
+          href="/settings"
+          className="flex items-center gap-3 px-4 py-3 hover:bg-white/5"
+        >
+          <Settings size={16} />
+          ตั้งค่า
+        </a>
+
+        <button
+          onClick={() => {
+            localStorage.removeItem("mc_user");
+            setUser(null);
+          }}
+          className="
+            w-full
+            flex items-center gap-3
+            px-4 py-3
+            text-red-400
+            hover:bg-red-500/10
+          "
+        >
+          <LogOut size={16} />
+          ออกจากระบบ
+        </button>
+      </div>
+    )}
   </div>
 )}
 
