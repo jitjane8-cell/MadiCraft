@@ -115,26 +115,94 @@ useEffect(() => {
           href="/login"
           className="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-purple-600 text-sm"
         >
-          Login
+          เข้าสู่ระบบ
         </a>
 
       </div>
 
-    ) : (
+) : (
 
+  <div className="relative">
+    <div
+      onClick={() => setMenuOpen(!menuOpen)}
+      className="flex items-center gap-2 cursor-pointer"
+    >
+      <img
+        src={`https://mc-heads.net/avatar/${user}/100`}
+        className="w-10 h-10 rounded-xl"
+      />
+
+      <Menu size={18} />
+    </div>
+
+    {menuOpen && (
       <div
-        onClick={() => setMenuOpen(!menuOpen)}
-        className="flex items-center gap-2"
+        className="
+          absolute
+          top-full
+          right-0
+          mt-2
+          w-56
+          rounded-2xl
+          bg-[#090d16]
+          border border-white/10
+          backdrop-blur-xl
+          shadow-2xl
+          overflow-hidden
+          z-[9999]
+        "
       >
-        <img
-          src={`https://mc-heads.net/avatar/${user}/100`}
-          className="w-10 h-10 rounded-xl"
-        />
+        <div className="p-4 border-b border-white/10">
+          <div className="font-semibold">{user}</div>
+          <div className="text-xs text-zinc-400">
+            Minecraft Account
+          </div>
+        </div>
 
-        <Menu size={18} />
+        <a
+          href="/profile"
+          className="flex items-center gap-3 px-4 py-3 hover:bg-white/5"
+        >
+          <User size={16} />
+          โปรไฟล์
+        </a>
+
+        <a
+          href="/topup"
+          className="flex items-center gap-3 px-4 py-3 hover:bg-white/5"
+        >
+          <Wallet size={16} />
+          เติมเงิน
+        </a>
+
+        <a
+          href="/madipass"
+          className="flex items-center gap-3 px-4 py-3 hover:bg-white/5"
+        >
+          🎁 MadiPass
+        </a>
+
+        <button
+          onClick={() => {
+            localStorage.removeItem("mc_user");
+            setUser(null);
+          }}
+          className="
+            w-full
+            flex items-center gap-3
+            px-4 py-3
+            text-red-400
+            hover:bg-red-500/10
+          "
+        >
+          <LogOut size={16} />
+          ออกจากระบบ
+        </button>
       </div>
-
     )}
+  </div>
+
+)}
 
   </div>
 </div>
@@ -453,8 +521,8 @@ lg:w-[680px]
         </div>
 
           {/* PLAY BUTTONS */}
-          <div className="mt-6 md:mt-8 relative z-10">
-          <div className="lg:hidden w-full max-w-md px-4">
+<div className="mt-6 md:mt-8 relative z-10 w-full flex justify-center">
+  <div className="lg:hidden w-full max-w-sm px-4">
   <button
     onClick={() => {
       navigator.clipboard.writeText("play.madicraft.online");
