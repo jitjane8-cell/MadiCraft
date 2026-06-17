@@ -68,13 +68,24 @@ useEffect(() => {
   return (
     <main className="min-h-screen bg-[#02040a] text-white overflow-x-hidden">
 
-      {/* BACKGROUND */}
-      <div className="fixed inset-0 z-0">
-        <div className="absolute inset-0 bg-[url('/images/8022.png')] bg-cover bg-center opacity-40 blur-sm scale-105" />
-        <div className="absolute top-0 left-0 w-[60%] h-[60%] bg-cyan-500/10 blur-[140px]" />
-        <div className="absolute bottom-0 right-0 w-[60%] h-[60%] bg-purple-500/10 blur-[140px]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/30 to-black/80" />
-      </div>
+{/* BACKGROUND */}
+<div className="fixed inset-0 z-0">
+  <div
+    className="
+      absolute inset-0
+      bg-[url('/images/8022.png')]
+      bg-cover
+      bg-center
+      opacity-70
+      scale-105
+    "
+  />
+
+  <div className="absolute top-0 left-0 w-[60%] h-[60%] bg-cyan-500/10 blur-[140px]" />
+  <div className="absolute bottom-0 right-0 w-[60%] h-[60%] bg-purple-500/10 blur-[140px]" />
+
+  <div className="absolute inset-0 bg-black/40" />
+</div>
 
       {/* MOBILE NAV */}
       <div className="fixed bottom-4 left-1/2 -translate-x-1/2 flex lg:hidden gap-3 bg-white/5 border border-white/10 backdrop-blur px-4 py-2 rounded-2xl z-50">

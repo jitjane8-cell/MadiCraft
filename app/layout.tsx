@@ -12,13 +12,14 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "MADICRAFT",
   description: "เซิร์ฟเวอร์ Minecraft Survival",
 
   icons: {
-    icon: "/images/logo.png",
+    icon: "/images/favicon.png",
   },
+
 
   openGraph: {
     title: "MADICRAFT",
