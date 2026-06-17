@@ -543,7 +543,26 @@ lg:w-[680px]
     🎮 PLAY.MADICRAFT.ONLINE
   </button>
 </div>
-
+<div className="lg:hidden w-full max-w-sm px-4 mt-3">
+  <a
+    href="https://discord.gg/rGsa43aAQc"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="
+      w-full
+      flex items-center
+      justify-center
+      gap-3
+      py-4
+      rounded-2xl
+      bg-[#5865F2]
+      font-bold
+    "
+  >
+    <MessageCircle size={20} />
+    Discord • {onlineCount} Online
+  </a>
+</div>
           </div>
 
           {/* STATUS BAR - ทำเป็นแถบยาวตามรูปตัวอย่าง */}
