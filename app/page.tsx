@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+
 import {
   Home,
   ShoppingCart,
@@ -19,12 +20,28 @@ export default function Page() {
   const [user, setUser] = useState<string | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [onlineCount, setOnlineCount] = useState(0);
-  
+  const menuRef = useRef<HTMLDivElement>(null);
   const [serverData, setServerData] = useState({
   online: 0,
   max: 0,
   version: "Loading...",
   });
+useEffect(() => {
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      menuRef.current &&
+      !menuRef.current.contains(event.target as Node)
+    ) {
+      setMenuOpen(false);
+    }
+  };
+
+  document.addEventListener("mousedown", handleClickOutside);
+
+  return () => {
+    document.removeEventListener("mousedown", handleClickOutside);
+  };
+}, []);
   useEffect(() => {
     const fetchDiscord = () => {
       fetch("https://discord.com/api/guilds/1474899729631678557/widget.json")
@@ -46,6 +63,7 @@ useEffect(() => {
   if (username) {
     setUser(username);
   }
+
 }, []);
   useEffect(() => {
   const fetchServer = () => {
@@ -67,6 +85,8 @@ useEffect(() => {
 
   return (
     <main className="min-h-screen bg-[#02040a] text-white overflow-x-hidden">
+
+
 
 {/* BACKGROUND */}
 <div className="fixed inset-0 z-0">
@@ -133,7 +153,10 @@ useEffect(() => {
 
 ) : (
 
-  <div className="relative">
+  <div
+  ref={menuRef}
+  className="relative"
+>
     <div
       onClick={() => setMenuOpen(!menuOpen)}
       className="flex items-center gap-2 cursor-pointer"
@@ -146,71 +169,142 @@ useEffect(() => {
       <Menu size={18} />
     </div>
 
-    {menuOpen && (
-      <div
-        className="
-          absolute
-          top-full
-          right-0
-          mt-2
-          w-56
-          rounded-2xl
-          bg-[#090d16]
-          border border-white/10
-          backdrop-blur-xl
-          shadow-2xl
-          overflow-hidden
-          z-[9999]
-        "
-      >
-        <div className="p-4 border-b border-white/10">
-          <div className="font-semibold">{user}</div>
+{menuOpen && (
+  <div
+    className="
+      absolute
+      top-full
+      right-0
+      mt-3
+      w-72
+      rounded-3xl
+      overflow-hidden
+      border border-cyan-500/20
+      bg-[#070b12]/95
+      backdrop-blur-2xl
+      shadow-[0_0_40px_rgba(34,211,238,0.15)]
+      z-[9999]
+      animate-in
+      fade-in
+      slide-in-from-top-2
+      duration-200
+    "
+  >
+
+    {/* PROFILE HEADER */}
+    <div className="p-5 border-b border-white/10">
+
+      <div className="flex items-center gap-3">
+
+        <img
+          src={`https://mc-heads.net/avatar/${user}/100`}
+          className="
+            w-14 h-14
+            rounded-2xl
+            border border-cyan-400/20
+          "
+        />
+
+        <div>
+          <div className="font-bold text-lg">
+            {user}
+          </div>
+
           <div className="text-xs text-zinc-400">
             Minecraft Account
           </div>
         </div>
 
-        <a
-          href="/profile"
-          className="flex items-center gap-3 px-4 py-3 hover:bg-white/5"
-        >
-          <User size={16} />
-          โปรไฟล์
-        </a>
-
-        <a
-          href="/topup"
-          className="flex items-center gap-3 px-4 py-3 hover:bg-white/5"
-        >
-          <Wallet size={16} />
-          เติมเงิน
-        </a>
-
-        <a
-          href="/madipass"
-          className="flex items-center gap-3 px-4 py-3 hover:bg-white/5"
-        >
-          🎁 MadiPass
-        </a>
-
-        <button
-          onClick={() => {
-            localStorage.removeItem("mc_user");
-            setUser(null);
-          }}
-          className="
-            w-full
-            flex items-center gap-3
-            px-4 py-3
-            text-red-400
-            hover:bg-red-500/10
-          "
-        >
-          <LogOut size={16} />
-          ออกจากระบบ
-        </button>
       </div>
-    )}
+
+    </div>
+
+    {/* MENU */}
+
+    <div className="py-2">
+
+      <a
+        href="/profile"
+        className="
+          flex items-center gap-3
+          px-5 py-3
+          hover:bg-white/5
+          transition
+        "
+      >
+        <User size={18} />
+        <span>โปรไฟล์</span>
+      </a>
+
+      <a
+        href="/topup"
+        className="
+          flex items-center gap-3
+          px-5 py-3
+          hover:bg-white/5
+          transition
+        "
+      >
+        <Wallet size={18} />
+        <span>เติมเงิน</span>
+      </a>
+
+      <a
+        href="/madipass"
+        className="
+          flex items-center gap-3
+          px-5 py-3
+          hover:bg-white/5
+          transition
+        "
+      >
+        🎁
+        <span>MadiPass</span>
+      </a>
+
+      <a
+        href="/settings"
+        className="
+          flex items-center gap-3
+          px-5 py-3
+          hover:bg-white/5
+          transition
+        "
+      >
+        <Settings size={18} />
+        <span>ตั้งค่า</span>
+      </a>
+
+    </div>
+
+    {/* LOGOUT */}
+
+    <div className="border-t border-white/10 p-2">
+
+      <button
+        onClick={() => {
+          localStorage.removeItem("mc_user");
+          setUser(null);
+          setMenuOpen(false);
+        }}
+        className="
+          w-full
+          flex items-center gap-3
+          px-4 py-3
+          rounded-xl
+          text-red-400
+          hover:bg-red-500/10
+          transition
+        "
+      >
+        <LogOut size={18} />
+        ออกจากระบบ
+      </button>
+
+    </div>
+
+  </div>
+)}
   </div>
 
 )}
@@ -331,7 +425,10 @@ useEffect(() => {
     เข้าสู่ระบบ
   </a>
 ) : (
-  <div className="relative">
+  <div
+  ref={menuRef}
+  className="relative"
+>
     
 <div
   onClick={() => setMenuOpen(!menuOpen)}
@@ -356,75 +453,137 @@ useEffect(() => {
     className="
       absolute
       top-full
-      mt-2
       right-0
-      w-60
-      rounded-2xl
-      bg-[#090d16]
-      border border-white/10
-      backdrop-blur-xl
-      shadow-2xl
+      mt-3
+      w-72
+      rounded-3xl
       overflow-hidden
-      z-[999]
+      border border-cyan-500/20
+      bg-[#070b12]/95
+      backdrop-blur-2xl
+      shadow-[0_0_40px_rgba(34,211,238,0.15)]
+      z-[9999]
+      animate-in
+      fade-in
+      slide-in-from-top-2
+      duration-200
     "
   >
-        <div className="p-4 border-b border-white/10">
-          <div className="font-semibold">{user}</div>
+
+    {/* PROFILE HEADER */}
+    <div className="p-5 border-b border-white/10">
+
+      <div className="flex items-center gap-3">
+
+        <img
+          src={`https://mc-heads.net/avatar/${user}/100`}
+          className="
+            w-14 h-14
+            rounded-2xl
+            border border-cyan-400/20
+          "
+        />
+
+        <div>
+          <div className="font-bold text-lg">
+            {user}
+          </div>
+
           <div className="text-xs text-zinc-400">
             Minecraft Account
           </div>
         </div>
 
-        <a
-          href="/profile"
-          className="flex items-center gap-3 px-4 py-3 hover:bg-white/5"
-        >
-          <User size={16} />
-          โปรไฟล์
-        </a>
-
-        <a
-          href="/topup"
-          className="flex items-center gap-3 px-4 py-3 hover:bg-white/5"
-        >
-          <Wallet size={16} />
-          เติมเงิน
-        </a>
-
-        <a
-          href="/madipass"
-          className="flex items-center gap-3 px-4 py-3 hover:bg-white/5"
-        >
-          🎁
-          MadiPass
-        </a>
-
-        <a
-          href="/settings"
-          className="flex items-center gap-3 px-4 py-3 hover:bg-white/5"
-        >
-          <Settings size={16} />
-          ตั้งค่า
-        </a>
-
-        <button
-          onClick={() => {
-            localStorage.removeItem("mc_user");
-            setUser(null);
-          }}
-          className="
-            w-full
-            flex items-center gap-3
-            px-4 py-3
-            text-red-400
-            hover:bg-red-500/10
-          "
-        >
-          <LogOut size={16} />
-          ออกจากระบบ
-        </button>
       </div>
-    )}
+
+    </div>
+
+    {/* MENU */}
+
+    <div className="py-2">
+
+      <a
+        href="/profile"
+        className="
+          flex items-center gap-3
+          px-5 py-3
+          hover:bg-white/5
+          transition
+        "
+      >
+        <User size={18} />
+        <span>โปรไฟล์</span>
+      </a>
+
+      <a
+        href="/topup"
+        className="
+          flex items-center gap-3
+          px-5 py-3
+          hover:bg-white/5
+          transition
+        "
+      >
+        <Wallet size={18} />
+        <span>เติมเงิน</span>
+      </a>
+
+      <a
+        href="/madipass"
+        className="
+          flex items-center gap-3
+          px-5 py-3
+          hover:bg-white/5
+          transition
+        "
+      >
+        🎁
+        <span>MadiPass</span>
+      </a>
+
+      <a
+        href="/settings"
+        className="
+          flex items-center gap-3
+          px-5 py-3
+          hover:bg-white/5
+          transition
+        "
+      >
+        <Settings size={18} />
+        <span>ตั้งค่า</span>
+      </a>
+
+    </div>
+
+    {/* LOGOUT */}
+
+    <div className="border-t border-white/10 p-2">
+
+      <button
+        onClick={() => {
+          localStorage.removeItem("mc_user");
+          setUser(null);
+          setMenuOpen(false);
+        }}
+        className="
+          w-full
+          flex items-center gap-3
+          px-4 py-3
+          rounded-xl
+          text-red-400
+          hover:bg-red-500/10
+          transition
+        "
+      >
+        <LogOut size={18} />
+        ออกจากระบบ
+      </button>
+
+    </div>
+
+  </div>
+)}
   </div>
 )}
 
