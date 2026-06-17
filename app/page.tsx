@@ -521,49 +521,52 @@ lg:w-[680px]
         </div>
 
           {/* PLAY BUTTONS */}
-<div className="mt-6 md:mt-8 relative z-10 w-full flex justify-center">
+<div className="mt-6 md:mt-8 relative z-10 w-full flex flex-col items-center">
+
   <div className="lg:hidden w-full max-w-sm px-4">
-  <button
-    onClick={() => {
-      navigator.clipboard.writeText("play.madicraft.online");
-      alert("คัดลอก IP แล้ว");
-    }}
-    className="
-      w-full
-      py-4
-      rounded-2xl
-      bg-gradient-to-r
-      from-cyan-500
-      to-purple-600
-      font-bold
-      text-lg
-      shadow-[0_0_25px_rgba(34,211,238,0.35)]
-    "
-  >
-    🎮 PLAY.MADICRAFT.ONLINE
-  </button>
+    <button
+      onClick={() => {
+        navigator.clipboard.writeText("play.madicraft.online");
+        alert("คัดลอก IP แล้ว");
+      }}
+      className="
+        w-full
+        py-4
+        rounded-2xl
+        bg-gradient-to-r
+        from-cyan-500
+        to-purple-600
+        font-bold
+        text-lg
+        shadow-[0_0_25px_rgba(34,211,238,0.35)]
+      "
+    >
+      🎮 PLAY.MADICRAFT.ONLINE
+    </button>
+  </div>
+
+  <div className="lg:hidden w-full max-w-sm px-4 mt-3">
+    <a
+      href="https://discord.gg/rGsa43aAQc"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="
+        w-full
+        flex items-center
+        justify-center
+        gap-3
+        py-4
+        rounded-2xl
+        bg-[#5865F2]
+        font-bold
+      "
+    >
+      <MessageCircle size={20} />
+      Discord • {onlineCount} Online
+    </a>
+  </div>
+
 </div>
-<div className="lg:hidden w-full max-w-sm px-4 mt-3">
-  <a
-    href="https://discord.gg/rGsa43aAQc"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="
-      w-full
-      flex items-center
-      justify-center
-      gap-3
-      py-4
-      rounded-2xl
-      bg-[#5865F2]
-      font-bold
-    "
-  >
-    <MessageCircle size={20} />
-    Discord • {onlineCount} Online
-  </a>
-</div>
-          </div>
 
           {/* STATUS BAR - ทำเป็นแถบยาวตามรูปตัวอย่าง */}
           <div className="mt-12 md:mt-16 w-full max-w-5xl px-6 relative z-10 mx-auto">
