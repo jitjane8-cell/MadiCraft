@@ -20,7 +20,8 @@ export default function Page() {
   const [user, setUser] = useState<string | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [onlineCount, setOnlineCount] = useState(0);
-  const menuRef = useRef<HTMLDivElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const desktopMenuRef = useRef<HTMLDivElement>(null);
   const [serverData, setServerData] = useState({
   online: 0,
   max: 0,
@@ -28,10 +29,14 @@ export default function Page() {
   });
 useEffect(() => {
   const handleClickOutside = (event: MouseEvent) => {
-    if (
-      menuRef.current &&
-      !menuRef.current.contains(event.target as Node)
-    ) {
+if (
+  mobileMenuRef.current &&
+  !mobileMenuRef.current.contains(event.target as Node) &&
+  desktopMenuRef.current &&
+  !desktopMenuRef.current.contains(event.target as Node)
+) {
+  setMenuOpen(false);
+} {
       setMenuOpen(false);
     }
   };
@@ -153,10 +158,7 @@ useEffect(() => {
 
 ) : (
 
-  <div
-  ref={menuRef}
-  className="relative"
->
+<div ref={mobileMenuRef} className="relative">
     <div
       onClick={() => setMenuOpen(!menuOpen)}
       className="flex items-center gap-2 cursor-pointer"
@@ -425,10 +427,8 @@ useEffect(() => {
     เข้าสู่ระบบ
   </a>
 ) : (
-  <div
-  ref={menuRef}
-  className="relative"
->
+<div ref={desktopMenuRef} className="relative">
+
     
 <div
   onClick={() => setMenuOpen(!menuOpen)}
@@ -673,7 +673,7 @@ useEffect(() => {
             src="/images/8024.png"
             alt="Madicraft Logo"
             className="
-w-[220px]
+w-[300px]
 sm:w-[320px]
 md:w-[680px]
 lg:w-[680px]
@@ -693,7 +693,7 @@ lg:w-[680px]
           {/* PLAY BUTTONS */}
 <div className="mt-6 md:mt-8 relative z-10 w-full flex flex-col items-center">
 
-  <div className="lg:hidden w-full max-w-sm px-4">
+  <div className="lg:hidden w-full max-w-[280px] px-4">
     <button
       onClick={() => {
         navigator.clipboard.writeText("play.madicraft.online");
@@ -701,13 +701,13 @@ lg:w-[680px]
       }}
       className="
         w-full
-        py-4
+        py-3
         rounded-2xl
         bg-gradient-to-r
         from-cyan-500
         to-purple-600
         font-bold
-        text-lg
+        text-base
         shadow-[0_0_25px_rgba(34,211,238,0.35)]
       "
     >
@@ -715,7 +715,7 @@ lg:w-[680px]
     </button>
   </div>
 
-  <div className="lg:hidden w-full max-w-sm px-4 mt-3">
+  <div className="lg:hidden w-full max-w-[280px] mt-3">
     <a
       href="https://discord.gg/rGsa43aAQc"
       target="_blank"
@@ -725,7 +725,7 @@ lg:w-[680px]
         flex items-center
         justify-center
         gap-3
-        py-4
+        py-3
         rounded-2xl
         bg-[#5865F2]
         font-bold
