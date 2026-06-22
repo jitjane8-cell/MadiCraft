@@ -18,7 +18,8 @@ import {
 
 export default function Page() {
   const [user, setUser] = useState<string | null>(null);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [desktopMenuOpen, setDesktopMenuOpen] = useState(false);
   const [onlineCount, setOnlineCount] = useState(0);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const desktopMenuRef = useRef<HTMLDivElement>(null);
@@ -29,15 +30,20 @@ export default function Page() {
   });
 useEffect(() => {
   const handleClickOutside = (event: MouseEvent) => {
-if (
-  mobileMenuRef.current &&
-  !mobileMenuRef.current.contains(event.target as Node) &&
-  desktopMenuRef.current &&
-  !desktopMenuRef.current.contains(event.target as Node)
-) {
-  setMenuOpen(false);
-} {
-      setMenuOpen(false);
+    const target = event.target as Node;
+
+    if (
+      mobileMenuRef.current &&
+      !mobileMenuRef.current.contains(target)
+    ) {
+      setMobileMenuOpen(false);
+    }
+
+    if (
+      desktopMenuRef.current &&
+      !desktopMenuRef.current.contains(target)
+    ) {
+      setDesktopMenuOpen(false);
     }
   };
 
@@ -47,6 +53,7 @@ if (
     document.removeEventListener("mousedown", handleClickOutside);
   };
 }, []);
+
   useEffect(() => {
     const fetchDiscord = () => {
       fetch("https://discord.com/api/guilds/1474899729631678557/widget.json")
@@ -130,7 +137,7 @@ useEffect(() => {
       {/* CONTENT */}
       <div className="relative z-10">
 {/* MOBILE HEADER */}
-<div className="lg:hidden sticky top-0 z-50">
+<div className="lg:hidden sticky top-0 z-[9999]">
   <div className="flex items-center justify-between px-4 py-3 bg-black/50 backdrop-blur-xl border-b border-white/10">
 
     <div>
@@ -160,7 +167,7 @@ useEffect(() => {
 
 <div ref={mobileMenuRef} className="relative">
     <div
-      onClick={() => setMenuOpen(!menuOpen)}
+      onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
       className="flex items-center gap-2 cursor-pointer"
     >
       <img
@@ -171,7 +178,7 @@ useEffect(() => {
       <Menu size={18} />
     </div>
 
-{menuOpen && (
+{mobileMenuOpen && (
   <div
     className="
       absolute
@@ -287,7 +294,7 @@ useEffect(() => {
         onClick={() => {
           localStorage.removeItem("mc_user");
           setUser(null);
-          setMenuOpen(false);
+          setMobileMenuOpen(false);
         }}
         className="
           w-full
@@ -431,7 +438,7 @@ useEffect(() => {
 
     
 <div
-  onClick={() => setMenuOpen(!menuOpen)}
+  onClick={() => setDesktopMenuOpen(!desktopMenuOpen)}
   className="
     flex items-center gap-8
     cursor-pointer
@@ -448,7 +455,7 @@ useEffect(() => {
   <Menu size={16} />
 </div>
 
-{menuOpen && (
+{desktopMenuOpen && (
   <div
     className="
       absolute
@@ -564,7 +571,7 @@ useEffect(() => {
         onClick={() => {
           localStorage.removeItem("mc_user");
           setUser(null);
-          setMenuOpen(false);
+          setDesktopMenuOpen(false);
         }}
         className="
           w-full
