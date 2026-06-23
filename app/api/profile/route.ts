@@ -16,11 +16,11 @@ console.log({
   database: process.env.DB_NAME,
 });
 const db = await mysql.createConnection({
-  host: process.env.DB_HOST,
-  port: Number(process.env.DB_PORT),
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
+  host: "143.20.142.213",
+  port: 3306,
+  user: "web",
+  password: "051160",
+  database: "authme",
 });
 
     const [users]: any = await db.execute(
