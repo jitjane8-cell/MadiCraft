@@ -21,7 +21,7 @@ export async function POST(req: Request) {
     const db = await mysql.createConnection({
       host: "143.20.142.213",
       user: "web",
-      password: "MadiWeb123!",
+      password: "051160",
       database: "authme",
     });
 
