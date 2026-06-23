@@ -58,12 +58,19 @@ useEffect(() => {
 useEffect(() => {
   if (!user) return;
 
-  fetch(`/api/profile?username=${user}`)
-    .then((res) => res.json())
-    .then((data) => {
-      setPoints(data.points || 0);
-    })
-    .catch(console.error);
+  const fetchPoints = () => {
+    fetch(`/api/profile?username=${user}`)
+      .then((res) => res.json())
+      .then((data) => setPoints(data.points || 0))
+      .catch(console.error);
+  };
+
+  fetchPoints();
+
+  const interval = setInterval(fetchPoints, 5000); // ทุก 5 วินาที
+
+  return () => clearInterval(interval);
+
 }, [user]);
   useEffect(() => {
     const fetchDiscord = () => {
