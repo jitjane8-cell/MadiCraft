@@ -59,10 +59,17 @@ useEffect(() => {
   if (!user) return;
 
   const fetchPoints = () => {
-    fetch(`/api/profile?username=${user}`)
-      .then((res) => res.json())
-      .then((data) => setPoints(data.points || 0))
-      .catch(console.error);
+fetch(`/api/profile?username=${user}`)
+  .then(async (res) => {
+    const text = await res.text();
+    console.log(text);
+
+    if (!text) return { points: 0 };
+
+    return JSON.parse(text);
+  })
+  .then((data) => setPoints(data.points || 0))
+  .catch(console.error);
   };
 
   fetchPoints();
