@@ -18,12 +18,14 @@ import {
 
 export default function Page() {
   const [user, setUser] = useState<string | null>(null);
+  const [points, setPoints] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [desktopMenuOpen, setDesktopMenuOpen] = useState(false);
   const [onlineCount, setOnlineCount] = useState(0);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const desktopMenuRef = useRef<HTMLDivElement>(null);
   const [serverData, setServerData] = useState({
+    
   online: 0,
   max: 0,
   version: "Loading...",
@@ -53,7 +55,16 @@ useEffect(() => {
     document.removeEventListener("mousedown", handleClickOutside);
   };
 }, []);
+useEffect(() => {
+  if (!user) return;
 
+  fetch(`/api/profile?username=${user}`)
+    .then((res) => res.json())
+    .then((data) => {
+      setPoints(data.points || 0);
+    })
+    .catch(console.error);
+}, [user]);
   useEffect(() => {
     const fetchDiscord = () => {
       fetch("https://discord.com/api/guilds/1474899729631678557/widget.json")
@@ -214,15 +225,15 @@ useEffect(() => {
           "
         />
 
-        <div>
-          <div className="font-bold text-lg">
-            {user}
-          </div>
+<div>
+<div className="text-sm text-cyan-300 font-medium">
+  💎 {points.toLocaleString()} Points
+</div>
 
-          <div className="text-xs text-zinc-400">
-            Minecraft Account
-          </div>
-        </div>
+  <div className="text-sm text-cyan-300 flex items-center gap-1">
+    💎 {points.toLocaleString()} Points
+  </div>
+</div>
 
       </div>
 
@@ -496,9 +507,9 @@ useEffect(() => {
             {user}
           </div>
 
-          <div className="text-xs text-zinc-400">
-            Minecraft Account
-          </div>
+<div className="text-sm text-cyan-300 font-medium">
+  💎 {points.toLocaleString()} Points
+</div>
         </div>
 
       </div>
