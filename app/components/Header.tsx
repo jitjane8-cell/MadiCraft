@@ -15,17 +15,14 @@ import {
   Settings,
 } from "lucide-react";
 
-
 export default function Header() {
   const [user, setUser] = useState<string | null>(null);
   const [points, setPoints] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [desktopMenuOpen, setDesktopMenuOpen] = useState(false);
   const [onlineCount, setOnlineCount] = useState(0);
-
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const desktopMenuRef = useRef<HTMLDivElement>(null);
-
   const [serverData, setServerData] = useState({
     online: 0,
     max: 0,
@@ -34,14 +31,12 @@ export default function Header() {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Node;
-  
       if (
         mobileMenuRef.current &&
         !mobileMenuRef.current.contains(target)
       ) {
         setMobileMenuOpen(false);
       }
-  
       if (
         desktopMenuRef.current &&
         !desktopMenuRef.current.contains(target)
@@ -49,36 +44,27 @@ export default function Header() {
         setDesktopMenuOpen(false);
       }
     };
-  
     document.addEventListener("mousedown", handleClickOutside);
-  
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
   useEffect(() => {
     if (!user) return;
-  
     const fetchPoints = () => {
   fetch(`/api/profile?username=${user}`)
     .then(async (res) => {
       const text = await res.text();
       console.log(text);
-  
       if (!text) return { points: 0 };
-  
       return JSON.parse(text);
     })
     .then((data) => setPoints(data.points || 0))
     .catch(console.error);
     };
-  
     fetchPoints();
-  
     const interval = setInterval(fetchPoints, 5000); // ทุก 5 วินาที
-  
     return () => clearInterval(interval);
-  
   }, [user]);
     useEffect(() => {
       const fetchDiscord = () => {
@@ -88,20 +74,15 @@ export default function Header() {
             setOnlineCount(data.presence_count || 0);
           });
       };
-  
       fetchDiscord();
-  
       const interval = setInterval(fetchDiscord, 30000);
-  
       return () => clearInterval(interval);
     }, []);
   useEffect(() => {
     const username = localStorage.getItem("mc_user");
-  
     if (username) {
       setUser(username);
     }
-  
   }, []);
 useEffect(() => {
   const fetchServer = () => {
@@ -112,17 +93,12 @@ useEffect(() => {
       })
       .catch(console.error);
   };
-
   fetchServer();
-
   const interval = setInterval(fetchServer, 30000);
-
   return () => clearInterval(interval);
 }, []);
-
 return (
   <>
-
       {/* MOBILE NAV */}
       <div className="fixed bottom-4 left-1/2 -translate-x-1/2 flex lg:hidden gap-3 bg-white/5 border border-white/10 backdrop-blur px-4 py-2 rounded-2xl z-50">
 {[
@@ -151,38 +127,29 @@ return (
 </a>
 ))}
       </div>
-
       {/* CONTENT */}
       <div className="relative z-[9999]">
 {/* MOBILE HEADER */}
 <div className="lg:hidden sticky top-0 z-[9999]">
-  <div className="flex items-center justify-between px-4 py-3 bg-black/50 backdrop-blur-xl border-b border-white/10">
-
+  <div className="flex items-center justify-between px-5 py-4 bg-black/60 backdrop-blur-3xl border-b border-white/10 shadow-[0_10px_50px_rgba(0,0,0,.45)]">
     <div>
       <div className="font-black text-xl bg-gradient-to-r from-cyan-300 to-purple-400 bg-clip-text text-transparent">
         MADICRAFT
       </div>
-
       <div className="text-[9px] tracking-[0.2em] text-zinc-400">
         JAVA & BEDROCK
       </div>
     </div>
-
     {!user ? (
-
       <div className="flex items-center gap-2">
-
         <a
           href="/login"
-          className="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-purple-600 text-sm"
+          className="px-5 py-2.5 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 shadow-[0_0_30px_rgba(34,211,238,.45)] active:scale-95 font-bold tracking-wide"
         >
           เข้าสู่ระบบ
         </a>
-
       </div>
-
 ) : (
-
 <div ref={mobileMenuRef} className="relative">
 <div
   onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -206,20 +173,16 @@ return (
       border border-cyan-400/20
     "
   />
-
   <div className="flex flex-col leading-tight">
     <span className="text-sm font-bold">
       {user}
     </span>
-
     <span className="text-[11px] text-cyan-300">
       💎 {points.toLocaleString()}
     </span>
   </div>
-
   <Menu size={16} className="ml-1 text-white/70" />
 </div>
-
 {mobileMenuOpen && (
   <div
     className="
@@ -248,43 +211,33 @@ return (
           src={`https://mc-heads.net/avatar/${user}/100`}
           className="w-14 h-14 rounded-2xl border border-cyan-400/20"
         />
-
         <div>
           <div className="font-bold text-lg">{user}</div>
-
           <div className="text-sm text-cyan-300">
             💎 {points.toLocaleString()} Points
           </div>
         </div>
       </div>
     </div>
-
     <div className="py-2">
-
       <a href="/profile" className="flex items-center gap-3 px-5 py-3 hover:bg-white/5 transition">
         <User size={18}/>
         โปรไฟล์
       </a>
-
       <a href="/topup" className="flex items-center gap-3 px-5 py-3 hover:bg-white/5 transition">
         <Wallet size={18}/>
         เติมเงิน
       </a>
-
       <a href="/madipass" className="flex items-center gap-3 px-5 py-3 hover:bg-white/5 transition">
         🎁
         MadiPass
       </a>
-
       <a href="/settings" className="flex items-center gap-3 px-5 py-3 hover:bg-white/5 transition">
         <Settings size={18}/>
         ตั้งค่า
       </a>
-
     </div>
-
     <div className="border-t border-white/10 p-2">
-
       <button
         onClick={()=>{
           localStorage.removeItem("mc_user");
@@ -306,18 +259,14 @@ return (
         <LogOut size={18}/>
         ออกจากระบบ
       </button>
-
     </div>
-
   </div>
 )}
 </div>
 )}
-
 </div>
 </div>
 <div className="px-4 pt-3 lg:hidden">
-
   <button
     onClick={() => {
       navigator.clipboard.writeText("play.madicraft.online");
@@ -357,11 +306,8 @@ return (
     font-bold
   "
 >
-
   <FaDiscord size={22} />
-
   {onlineCount.toLocaleString()} Online
-
 </a>
 </div>
         {/* HEADER */}
@@ -394,7 +340,6 @@ return (
             >
               MADICRAFT
             </div>
-
             <div
               className="
                 text-[10px]
@@ -409,10 +354,8 @@ return (
               JAVA & BEDROCK
             </div>
           </div>
-
           {/* CENTER MENU */}
           <nav className="hidden lg:flex items-center justify-center gap-8 justify-self-center">
-
             <a
               href="/"
               className="flex items-center gap-2 hover:text-cyan-400 transition"
@@ -420,7 +363,6 @@ return (
               <Home size={18} />
               หน้าหลัก
             </a>
-
             <a
               href="/guide"
               className="flex items-center gap-2 hover:text-cyan-400 transition"
@@ -428,7 +370,6 @@ return (
               <BookOpen size={18} />
               คู่มือ
             </a>
-
             <a
               href="/shop"
               className="flex items-center gap-2 hover:text-cyan-400 transition"
@@ -436,7 +377,6 @@ return (
               <ShoppingCart size={18} />
               ร้านค้า
             </a>
-
             <a
               href="/topup"
               className="flex items-center gap-2 hover:text-cyan-400 transition"
@@ -444,7 +384,6 @@ return (
               <Wallet size={18} />
               เติมเงิน
             </a>
-
             <a
               href="/leaderboard"
               className="flex items-center gap-2 hover:text-cyan-400 transition"
@@ -452,12 +391,9 @@ return (
               <Trophy size={18} />
               อันดับ
             </a>
-
           </nav>
-
           {/* RIGHT */}
           <div className="flex items-center gap-3 justify-self-end">
-
 {/* LOGIN / PROFILE */}
 {!user ? (
   <a
@@ -479,8 +415,6 @@ return (
   </a>
 ) : (
 <div ref={desktopMenuRef} className="relative">
-
-    
 <div
   onClick={() => setDesktopMenuOpen(!desktopMenuOpen)}
   className="
@@ -495,10 +429,8 @@ return (
     src={`https://mc-heads.net/avatar/${user}/100`}
     className="w-10 h-10 rounded-xl"
   />
-
   <Menu size={16} />
 </div>
-
 {desktopMenuOpen && (
   <div
     className="
@@ -520,12 +452,9 @@ return (
       duration-200
     "
   >
-
     {/* PROFILE HEADER */}
     <div className="p-5 border-b border-white/10">
-
       <div className="flex items-center gap-3">
-
         <img
           src={`https://mc-heads.net/avatar/${user}/100`}
           className="
@@ -534,25 +463,18 @@ return (
             border border-cyan-400/20
           "
         />
-
         <div>
           <div className="font-bold text-lg">
             {user}
           </div>
-
 <div className="text-sm text-cyan-300 font-medium">
   💎 {points.toLocaleString()} Points
 </div>
         </div>
-
       </div>
-
     </div>
-
     {/* MENU */}
-
     <div className="py-2">
-
       <a
         href="/profile"
         className="
@@ -565,7 +487,6 @@ return (
         <User size={18} />
         <span>โปรไฟล์</span>
       </a>
-
       <a
         href="/topup"
         className="
@@ -578,7 +499,6 @@ return (
         <Wallet size={18} />
         <span>เติมเงิน</span>
       </a>
-
       <a
         href="/madipass"
         className="
@@ -591,7 +511,6 @@ return (
         🎁
         <span>MadiPass</span>
       </a>
-
       <a
         href="/settings"
         className="
@@ -604,13 +523,9 @@ return (
         <Settings size={18} />
         <span>ตั้งค่า</span>
       </a>
-
     </div>
-
     {/* LOGOUT */}
-
     <div className="border-t border-white/10 p-2">
-
       <button
         onClick={() => {
           localStorage.removeItem("mc_user");
@@ -630,14 +545,11 @@ return (
         <LogOut size={18} />
         ออกจากระบบ
       </button>
-
     </div>
-
   </div>
 )}
   </div>
 )}
-
           {/* COPY IP */}
           <button
             onClick={() => {
@@ -660,7 +572,6 @@ return (
             <Gamepad2 size={16} />
             PLAY.MADICRAFT.ONLINE
           </button>
-
 {/* DISCORD */}
 <a
   href="https://discord.gg/rGsa43aAQc"
@@ -686,7 +597,6 @@ return (
     duration-300
   "
 >
-
   {/* Glow */}
   <div
     className="
@@ -699,7 +609,6 @@ return (
       to-cyan-300/10
     "
   />
-
   {/* Icon */}
   <div
     className="
@@ -722,16 +631,12 @@ return (
       className="text-white drop-shadow-lg"
     />
   </div>
-
   {/* Text */}
   <div className="relative flex flex-col">
-
     <div className="flex items-center gap-2">
-
       <span className="font-bold text-white">
         Discord
       </span>
-
       <span
         className="
           px-2
@@ -745,15 +650,11 @@ return (
       >
         LIVE
       </span>
-
     </div>
-
     <span className="text-sm text-white/75">
       👥 {onlineCount.toLocaleString()} Online
     </span>
-
   </div>
-
   {/* Arrow */}
   <div
     className="
@@ -766,15 +667,10 @@ return (
   >
     →
   </div>
-
 </a>
-
         </div>
-
 </header>
-
 </div>
-
 </>
 );
 }
