@@ -15,14 +15,17 @@ import {
   Settings,
 } from "lucide-react";
 
+
 export default function Header() {
   const [user, setUser] = useState<string | null>(null);
   const [points, setPoints] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [desktopMenuOpen, setDesktopMenuOpen] = useState(false);
   const [onlineCount, setOnlineCount] = useState(0);
+
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const desktopMenuRef = useRef<HTMLDivElement>(null);
+
   const [serverData, setServerData] = useState({
     online: 0,
     max: 0,
@@ -31,6 +34,7 @@ export default function Header() {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Node;
+
       if (
         mobileMenuRef.current &&
         !mobileMenuRef.current.contains(target)
@@ -130,62 +134,21 @@ return (
       {/* CONTENT */}
       <div className="relative z-[9999]">
 {/* MOBILE HEADER */}
-<div
-  className="
-  sticky top-0
-  z-[9999]
-  px-5
-  pt-5
-  pb-4
-
-  bg-black/55
-  backdrop-blur-3xl
-
-  border-b border-white/10
-
-  shadow-[0_20px_80px_rgba(0,0,0,.55)]
-"
->
-
-<div className="flex items-center justify-between">
-
-<div>
-
-<div
-className="
-text-2xl
-font-black
-tracking-tight
-bg-gradient-to-r
-from-cyan-300
-via-white
-to-purple-400
-bg-clip-text
-text-transparent
-drop-shadow-[0_0_20px_rgba(255,255,255,.25)]
-"
->
-MADICRAFT
-</div>
-
-<div
-className="
-mt-1
-text-[10px]
-tracking-[0.4em]
-uppercase
-text-cyan-300/70
-"
->
-JAVA • BEDROCK
-</div>
-
-</div>
+<div className="lg:hidden sticky top-0 z-[9999]">
+  <div className="flex items-center justify-between px-4 py-3 bg-black/50 backdrop-blur-xl border-b border-white/10">
+    <div>
+      <div className="font-black text-xl bg-gradient-to-r from-cyan-300 to-purple-400 bg-clip-text text-transparent">
+        MADICRAFT
+      </div>
+      <div className="text-[9px] tracking-[0.2em] text-zinc-400">
+        JAVA & BEDROCK
+      </div>
+    </div>
     {!user ? (
       <div className="flex items-center gap-2">
         <a
           href="/login"
-          className="px-5 py-2.5 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 shadow-[0_0_30px_rgba(34,211,238,.45)] active:scale-95 font-bold tracking-wide"
+          className="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-purple-600 text-sm"
         >
           เข้าสู่ระบบ
         </a>
@@ -193,60 +156,73 @@ JAVA • BEDROCK
 ) : (
 <div ref={mobileMenuRef} className="relative">
 <div
-onClick={()=>setMobileMenuOpen(!mobileMenuOpen)}
-className="
-flex
-items-center
-gap-3
-px-3
-py-2
-rounded-2xl
-bg-gradient-to-r
-from-white/10
-to-white/5
-
-border border-cyan-500/20
-
-shadow-[0_0_25px_rgba(34,211,238,.18)]
-
-active:scale-95
-
-transition-all
-duration-300
-
-cursor-pointer
-"
+  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+  className="
+    flex items-center
+    gap-3
+    px-3 py-2
+    rounded-2xl
+    bg-white/5
+    border border-white/10
+    active:scale-95
+    transition
+    cursor-pointer
+  "
 >
-
-<img
-src={`https://mc-heads.net/avatar/${user}/100`}
-className="
-w-11
-h-11
-rounded-xl
-
-border-2
-border-cyan-400/30
-
-shadow-[0_0_20px_rgba(34,211,238,.4)]
-"
-/>
-
-<div>
-
-<div className="font-bold text-sm">
-{user}
+  <img
+    src={`https://mc-heads.net/avatar/${user}/100`}
+    className="
+      w-10 h-10
+      rounded-xl
+      border border-cyan-400/20
+    "
+  />
+  <div className="flex flex-col leading-tight">
+    <span className="text-sm font-bold">
+      {user}
+    </span>
+    <span className="text-[11px] text-cyan-300">
+      💎 {points.toLocaleString()}
+    </span>
+  </div>
+  <Menu size={16} className="ml-1 text-white/70" />
 </div>
-
-<div className="text-xs text-cyan-300">
-💎 {points.toLocaleString()}
-</div>
-
-</div>
-
-<Menu size={18}/>
-
-</div>
+{mobileMenuOpen && (
+  <div
+    className="
+      absolute
+      top-full
+      right-0
+      mt-3
+      w-72
+      rounded-3xl
+      overflow-hidden
+      border border-cyan-500/20
+      bg-[#070b12]/95
+      backdrop-blur-2xl
+      shadow-[0_0_40px_rgba(34,211,238,0.15)]
+      z-[9999]
+      animate-in
+      fade-in
+      slide-in-from-top-2
+      duration-200
+    "
+  >
+    {/* PROFILE HEADER */}
+    <div className="p-5 border-b border-white/10">
+      <div className="flex items-center gap-3">
+        <img
+          src={`https://mc-heads.net/avatar/${user}/100`}
+          className="w-14 h-14 rounded-2xl border border-cyan-400/20"
+        />
+        <div>
+          <div className="font-bold text-lg">{user}</div>
+          <div className="text-sm text-cyan-300">
+            💎 {points.toLocaleString()} Points
+          </div>
+        </div>
+      </div>
+    </div>
     <div className="py-2">
       <a href="/profile" className="flex items-center gap-3 px-5 py-3 hover:bg-white/5 transition">
         <User size={18}/>
@@ -291,48 +267,31 @@ shadow-[0_0_20px_rgba(34,211,238,.4)]
   </div>
 )}
 </div>
+)}
+</div>
 </div>
 <div className="px-4 pt-3 lg:hidden">
   <button
-className="
-w-full
-
-p-5
-
-flex
-
-items-center
-
-justify-between
-
-hover:bg-cyan-500/10
-
-transition
-"
->
-
-<div>
-
-<div className="text-xs text-zinc-400">
-SERVER
-</div>
-
-<div className="font-black text-lg">
-PLAY.MADICRAFT.ONLINE
-</div>
-
-<div className="text-cyan-300 text-sm">
-🟢 {serverData.online}/{serverData.max}
-</div>
-
-</div>
-
-<Gamepad2
-size={30}
-className="text-cyan-300"
-/>
-
-</button>
+    onClick={() => {
+      navigator.clipboard.writeText("play.madicraft.online");
+      alert("คัดลอก IP แล้ว");
+    }}
+    className="
+      w-full
+      flex
+      items-center
+      justify-center
+      gap-2
+      py-3
+      rounded-2xl
+      bg-cyan-500/10
+      border border-cyan-500/20
+      font-semibold
+    "
+  >
+    <Gamepad2 size={18}/>
+    PLAY.MADICRAFT.ONLINE
+  </button>
 <a
   href="https://discord.gg/rGsa43aAQc"
   target="_blank"
@@ -351,23 +310,8 @@ className="text-cyan-300"
     font-bold
   "
 >
-<div>
-
-<div className="font-bold">
-Discord Community
-</div>
-
-<div className="text-sm text-zinc-400">
-👥 {onlineCount} Online
-</div>
-
-</div>
-
-<FaDiscord
-size={32}
-className="text-[#7289da]"
-/>
-
+  <FaDiscord size={22} />
+  {onlineCount.toLocaleString()} Online
 </a>
 </div>
         {/* HEADER */}
