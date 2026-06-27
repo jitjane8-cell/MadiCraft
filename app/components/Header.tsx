@@ -8,7 +8,6 @@ import {
   Wallet,
   Trophy,
   BookOpen,
-  MessageCircle,
   Gamepad2,
   Menu,
   User,
@@ -140,7 +139,7 @@ return (
       </div>
 
       {/* CONTENT */}
-      <div className="relative z-10">
+      <div className="relative z-[9999]">
 {/* MOBILE HEADER */}
 <div className="lg:hidden sticky top-0 z-[9999]">
   <div className="flex items-center justify-between px-4 py-3 bg-black/50 backdrop-blur-xl border-b border-white/10">
@@ -329,7 +328,8 @@ return (
 <header
   className="
     hidden lg:grid
-    sticky top-0 z-50
+    sticky top-0
+    z-[99999]
     grid-cols-[220px_1fr_320px]
     items-center
     px-8 py-4
@@ -445,7 +445,7 @@ return (
 <div
   onClick={() => setDesktopMenuOpen(!desktopMenuOpen)}
   className="
-    flex items-center gap-8
+    flex items-center gap-3
     cursor-pointer
     px-3 py-1
     rounded-xl
@@ -632,8 +632,8 @@ return (
     relative
     overflow-hidden
     flex items-center
-    gap-4
-    px-6 py-3
+    gap-3
+    px-5 py-2.5
     rounded-2xl
     bg-gradient-to-r
     from-[#5865F2]
@@ -709,7 +709,7 @@ return (
 
     </div>
 
-    <span className="text-xs text-white/75">
+    <span className="text-sm text-white/75">
       👥 {onlineCount.toLocaleString()} Online
     </span>
 
