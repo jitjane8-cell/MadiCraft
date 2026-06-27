@@ -125,17 +125,31 @@ return (
 
       {/* MOBILE NAV */}
       <div className="fixed bottom-4 left-1/2 -translate-x-1/2 flex lg:hidden gap-3 bg-white/5 border border-white/10 backdrop-blur px-4 py-2 rounded-2xl z-50">
-        {[
-          [<Home size={18} />, "หน้าหลัก"],
-          [<BookOpen size={18} />, "คู่มือ"],
-          [<ShoppingCart size={18} />, "ร้านค้า"],
-          [<Wallet size={18} />, "เติมเงิน"],
-          [<Trophy size={18} />, "อันดับ"],
-        ].map((i, idx) => (
-          <button key={idx} className="p-2 rounded-xl hover:bg-white/10 transition">
-            {i[0]}
-          </button>
-        ))}
+{[
+  [<Home size={20}/>, "หน้าหลัก", "/"],
+  [<BookOpen size={20}/>, "คู่มือ", "/guide"],
+  [<ShoppingCart size={20}/>, "ร้านค้า", "/shop"],
+  [<Wallet size={20}/>, "เติมเงิน", "/topup"],
+  [<Trophy size={20}/>, "อันดับ", "/leaderboard"],
+].map(([icon,name,link],idx)=>(
+<a
+  key={idx}
+  href={link as string}
+  className="
+    flex
+    flex-col
+    items-center
+    gap-1
+    text-xs
+    text-white/70
+    hover:text-cyan-400
+    transition
+  "
+>
+  {icon}
+  <span>{name}</span>
+</a>
+))}
       </div>
 
       {/* CONTENT */}
@@ -170,17 +184,41 @@ return (
 ) : (
 
 <div ref={mobileMenuRef} className="relative">
-    <div
-      onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-      className="flex items-center gap-2 cursor-pointer"
-    >
-      <img
-        src={`https://mc-heads.net/avatar/${user}/100`}
-        className="w-10 h-10 rounded-xl"
-      />
+<div
+  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+  className="
+    flex items-center
+    gap-3
+    px-3 py-2
+    rounded-2xl
+    bg-white/5
+    border border-white/10
+    active:scale-95
+    transition
+    cursor-pointer
+  "
+>
+  <img
+    src={`https://mc-heads.net/avatar/${user}/100`}
+    className="
+      w-10 h-10
+      rounded-xl
+      border border-cyan-400/20
+    "
+  />
 
-      <Menu size={18} />
-    </div>
+  <div className="flex flex-col leading-tight">
+    <span className="text-sm font-bold">
+      {user}
+    </span>
+
+    <span className="text-[11px] text-cyan-300">
+      💎 {points.toLocaleString()}
+    </span>
+  </div>
+
+  <Menu size={16} className="ml-1 text-white/70" />
+</div>
 
 {mobileMenuOpen && (
   <div
@@ -203,114 +241,69 @@ return (
       duration-200
     "
   >
-
     {/* PROFILE HEADER */}
     <div className="p-5 border-b border-white/10">
-
       <div className="flex items-center gap-3">
-
         <img
           src={`https://mc-heads.net/avatar/${user}/100`}
-          className="
-            w-14 h-14
-            rounded-2xl
-            border border-cyan-400/20
-          "
+          className="w-14 h-14 rounded-2xl border border-cyan-400/20"
         />
 
-<div>
-  <div className="font-bold text-lg">
-    {user}
-  </div>
+        <div>
+          <div className="font-bold text-lg">{user}</div>
 
-  <div className="text-sm text-cyan-300">
-    💎 {points.toLocaleString()} Points
-  </div>
-</div>
-
+          <div className="text-sm text-cyan-300">
+            💎 {points.toLocaleString()} Points
+          </div>
+        </div>
       </div>
-
     </div>
-
-    {/* MENU */}
 
     <div className="py-2">
 
-      <a
-        href="/profile"
-        className="
-          flex items-center gap-3
-          px-5 py-3
-          hover:bg-white/5
-          transition
-        "
-      >
-        <User size={18} />
-        <span>โปรไฟล์</span>
+      <a href="/profile" className="flex items-center gap-3 px-5 py-3 hover:bg-white/5 transition">
+        <User size={18}/>
+        โปรไฟล์
       </a>
 
-      <a
-        href="/topup"
-        className="
-          flex items-center gap-3
-          px-5 py-3
-          hover:bg-white/5
-          transition
-        "
-      >
-        <Wallet size={18} />
-        <span>เติมเงิน</span>
+      <a href="/topup" className="flex items-center gap-3 px-5 py-3 hover:bg-white/5 transition">
+        <Wallet size={18}/>
+        เติมเงิน
       </a>
 
-      <a
-        href="/madipass"
-        className="
-          flex items-center gap-3
-          px-5 py-3
-          hover:bg-white/5
-          transition
-        "
-      >
+      <a href="/madipass" className="flex items-center gap-3 px-5 py-3 hover:bg-white/5 transition">
         🎁
-        <span>MadiPass</span>
+        MadiPass
       </a>
 
-      <a
-        href="/settings"
-        className="
-          flex items-center gap-3
-          px-5 py-3
-          hover:bg-white/5
-          transition
-        "
-      >
-        <Settings size={18} />
-        <span>ตั้งค่า</span>
+      <a href="/settings" className="flex items-center gap-3 px-5 py-3 hover:bg-white/5 transition">
+        <Settings size={18}/>
+        ตั้งค่า
       </a>
 
     </div>
-
-    {/* LOGOUT */}
 
     <div className="border-t border-white/10 p-2">
 
       <button
-        onClick={() => {
+        onClick={()=>{
           localStorage.removeItem("mc_user");
           setUser(null);
           setMobileMenuOpen(false);
         }}
         className="
           w-full
-          flex items-center gap-3
-          px-4 py-3
+          flex
+          items-center
+          gap-3
+          px-4
+          py-3
           rounded-xl
           text-red-400
           hover:bg-red-500/10
-          transition
         "
       >
-        <LogOut size={18} />
+        <LogOut size={18}/>
         ออกจากระบบ
       </button>
 
@@ -318,11 +311,58 @@ return (
 
   </div>
 )}
-  </div>
-
+</div>
 )}
 
-  </div>
+</div>
+</div>
+<div className="px-4 pt-3 lg:hidden">
+
+  <button
+    onClick={() => {
+      navigator.clipboard.writeText("play.madicraft.online");
+      alert("คัดลอก IP แล้ว");
+    }}
+    className="
+      w-full
+      flex
+      items-center
+      justify-center
+      gap-2
+      py-3
+      rounded-2xl
+      bg-cyan-500/10
+      border border-cyan-500/20
+      font-semibold
+    "
+  >
+    <Gamepad2 size={18}/>
+    PLAY.MADICRAFT.ONLINE
+  </button>
+<a
+  href="https://discord.gg/rGsa43aAQc"
+  target="_blank"
+  className="
+    mt-3
+    flex
+    items-center
+    justify-center
+    gap-3
+    py-3
+    rounded-2xl
+    bg-gradient-to-r
+    from-[#5865F2]
+    to-[#7289da]
+    text-white
+    font-bold
+  "
+>
+
+  <FaDiscord size={22} />
+
+  {onlineCount.toLocaleString()} Online
+
+</a>
 </div>
         {/* HEADER */}
 <header
@@ -338,7 +378,6 @@ return (
     border-b border-white/10
   "
 >
-
           {/* LOGO */}
           <div className="flex flex-col items-center">
             <div
